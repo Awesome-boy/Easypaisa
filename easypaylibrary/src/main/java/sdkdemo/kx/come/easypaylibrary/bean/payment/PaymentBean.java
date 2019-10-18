@@ -6,7 +6,7 @@ public class PaymentBean implements Serializable {
 
 
     private int inputCharset;
-    private int version;
+    private String version;
     private int signType;
     private String tradeNature;
 
@@ -55,11 +55,11 @@ public class PaymentBean implements Serializable {
         this.inputCharset = inputCharset;
     }
 
-    public int getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(String version) {
         this.version = version;
     }
 

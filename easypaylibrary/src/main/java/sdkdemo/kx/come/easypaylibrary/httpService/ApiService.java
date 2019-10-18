@@ -5,14 +5,14 @@ import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
-import sdkdemo.kx.come.easypaylibrary.bean.payment.BlAdressBean;
+import sdkdemo.kx.come.easypaylibrary.bean.payment.PaymentBean;
 
 public interface ApiService {
 
-    String BASE_URL = "http://sd.coshine.com/gateway";
+    String BASE_URL = "http://sd.coshine.com/gateway/";
 
-    @POST("/gateway/payment")
-    Observable<ResponseBody> getOrder(@Body BlAdressBean bean);
+    @POST("gateway/payment")
+    Observable<ResponseBody> getOrder(@Body PaymentBean bean);
 
 }
 

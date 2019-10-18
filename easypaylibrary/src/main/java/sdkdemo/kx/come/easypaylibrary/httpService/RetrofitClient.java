@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
+import java.nio.charset.Charset;
 import java.security.cert.CertificateException;
 import java.util.Map;
 import java.util.Objects;
@@ -17,15 +18,13 @@ import javax.net.ssl.X509TrustManager;
 
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
+import okio.Buffer;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import sdkdemo.kx.come.easypaylibrary.tools.SecurityUtil;
 
-/**
- * Author:zhousu
- * Date: 2018/4/17
- * Description:
- */
 
 public class RetrofitClient {
     private static RetrofitClient instance;
@@ -51,20 +50,31 @@ public class RetrofitClient {
 
     @SuppressWarnings("deprecation")
     private RetrofitClient(Context context) {
-        OkHttpClient.Builder builder = null;
-        try {
-            builder = new OkHttpClient.Builder()
+        OkHttpClient.Builder builder =  new OkHttpClient.Builder()
                     .connectTimeout(60, TimeUnit.SECONDS)
                     .readTimeout(60, TimeUnit.SECONDS)
                     .writeTimeout(60, TimeUnit.SECONDS)
-                    .addInterceptor(new BaseInterceptor((Map<String, String>) context))
-//                    .sslSocketFactory(getSSLSocketFactory())
+                    .addInterceptor(chain -> {
+                        Request req = chain.request();
+                        String param;
+                        if ("GET".equals(req.method()) || "DELETE".equals(req.method())) {
+                            param = req.url().query();
+                        } else {
+                            Buffer buffer = new Buffer();
+                            req.body().writeTo(buffer);
+                            param = buffer.clone().readString(Charset.forName("UTF-8"));
+                        }
+                        return chain.proceed(chain.request().newBuilder()
+                                .addHeader("x-lemon-sign", SecurityUtil.getMD5(param + "YhMFLPErFHAYucJI"))
+
+                                .addHeader("application/x-www-form-urlencoded","Content-Type")
+                                .build());
+                    })
+//                 .sslSocketFactory(getSSLSocketFactory())
                     .retryOnConnectionFailure(true)
+                    .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                     .hostnameVerifier((hostname, session) -> true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        builder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
+
         OkHttpClient okHttpClient = builder.build();
         Retrofit retrofit = new Retrofit.Builder().client(okHttpClient).addConverterFactory(GsonConverterFactory.create()).
                 addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io())).
