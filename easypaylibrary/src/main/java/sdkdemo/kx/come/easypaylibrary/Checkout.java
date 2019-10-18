@@ -17,7 +17,7 @@ import sdkdemo.kx.come.easypaylibrary.tools.CheckoutTools;
  *
  */
 
-public final class Checkout {
+public final class Checkout{
 
     private static Checkout mCheckout;
 
@@ -181,7 +181,7 @@ public final class Checkout {
      * @param mContext
      * @return true, 可用； false， 不可用
      */
-    public boolean isOpenNetwork(Context mContext) {
+    public static boolean isOpenNetwork(Context mContext) {
         ConnectivityManager connManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connManager.getActiveNetworkInfo() != null) {
             return connManager.getActiveNetworkInfo().isAvailable();

@@ -10,7 +10,7 @@ import okhttp3.ResponseBody;
 public interface CheckoutCallback {
     void onCancel(String mResultMessage);
 
-    void onSuccess(ResponseBody mResultMessage);
+    void onSuccess(String mResultMessage);
 
     void onError(String mResultMessage);
 }

@@ -1,5 +1,6 @@
 package sdkdemo.kx.come.easypaisa;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import okhttp3.ResponseBody;
 import sdkdemo.kx.come.easypaylibrary.Checkout;
+import sdkdemo.kx.come.easypaylibrary.activity.WebViewActivity;
 import sdkdemo.kx.come.easypaylibrary.bean.payment.BlAdressBean;
 import sdkdemo.kx.come.easypaylibrary.bean.payment.PaymentBean;
 import sdkdemo.kx.come.easypaylibrary.bean.payment.SpAdressBean;
@@ -22,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         initView();
 
     }
@@ -47,8 +48,12 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onSuccess(ResponseBody mResultMessage) {
+            public void onSuccess(String mResultMessage) {
                 Log.i("zt","onSuccess:"+mResultMessage);
+
+                Intent intent=new Intent(MainActivity.this,WebViewActivity.class);
+                intent.putExtra("data",mResultMessage);
+                startActivity(intent);
             }
 
             @Override
@@ -89,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         bean.setSignMsg("8f0e5fd0b3797194f27f0f547dcf9e0c");
         bean.setPayType(13);
         bean.setMerchantId("010704515311001");
-        bean.setOrderNo("20191017134537");
+        bean.setOrderNo("20191017134538");
         bean.setOrderCurrency("840");
         bean.setOrderDatetime("20191017134537");
         bean.setOrderAmount("0.11");

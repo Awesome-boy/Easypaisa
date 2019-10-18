@@ -38,7 +38,7 @@ public final class PaymentResult {
 //        resultInformation(PAY_STATE_FAILED, getNullResultMessage(code, msg, transactionId));
     }
 
-    public void successPayment(ResponseBody resultMessage) {
+    public void successPayment(String resultMessage) {
         resultInformation(PAY_STATE_SUCCESS, resultMessage);
     }
 
@@ -58,7 +58,7 @@ public final class PaymentResult {
         return resultMessage.toString();
     }
 
-    private void resultInformation(int code, ResponseBody mResultMessage) {
+    private void resultInformation(int code, String mResultMessage) {
         activityFinish();
         try {
             switch (code) {
