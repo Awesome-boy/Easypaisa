@@ -1,5 +1,6 @@
 package sdkdemo.kx.come.easypaylibrary.bean.payment;
 
+
 import java.io.Serializable;
 
 public class SpAdressBean implements Serializable {

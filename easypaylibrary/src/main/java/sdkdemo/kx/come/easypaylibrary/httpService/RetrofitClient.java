@@ -66,7 +66,6 @@ public class RetrofitClient {
                         }
                         return chain.proceed(chain.request().newBuilder()
                                 .addHeader("x-lemon-sign", SecurityUtil.getMD5(param + "YhMFLPErFHAYucJI"))
-
                                 .addHeader("application/x-www-form-urlencoded","Content-Type")
                                 .build());
                     })

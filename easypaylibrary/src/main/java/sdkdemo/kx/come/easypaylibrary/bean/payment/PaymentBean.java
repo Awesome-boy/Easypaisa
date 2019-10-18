@@ -190,4 +190,30 @@ public class PaymentBean implements Serializable {
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
     }
+
+    @Override
+    public String toString() {
+        return "PaymentBean{" +
+                "inputCharset=" + inputCharset +
+                ", version='" + version + '\'' +
+                ", signType=" + signType +
+                ", tradeNature='" + tradeNature + '\'' +
+                ", blAdressBean=" + blAdressBean +
+                ", spAdressBean=" + spAdressBean +
+                ", ext=" + ext +
+                ", signMsg='" + signMsg + '\'' +
+                ", payType=" + payType +
+                ", merchantId='" + merchantId + '\'' +
+                ", orderNo='" + orderNo + '\'' +
+                ", orderAmount='" + orderAmount + '\'' +
+                ", orderCurrency='" + orderCurrency + '\'' +
+                ", orderDatetime='" + orderDatetime + '\'' +
+                ", pickupUrl='" + pickupUrl + '\'' +
+                ", receiveUrl='" + receiveUrl + '\'' +
+                ", payerEmail='" + payerEmail + '\'' +
+                ", payerTelephone='" + payerTelephone + '\'' +
+                ", IPAdress='" + IPAdress + '\'' +
+                ", secretKey='" + secretKey + '\'' +
+                '}';
+    }
 }
