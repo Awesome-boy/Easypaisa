@@ -65,8 +65,7 @@ public class RetrofitClient {
                             param = buffer.clone().readString(Charset.forName("UTF-8"));
                         }
                         return chain.proceed(chain.request().newBuilder()
-                                .addHeader("x-lemon-sign", SecurityUtil.getMD5(param + "YhMFLPErFHAYucJI"))
-                                .addHeader("application/x-www-form-urlencoded","Content-Type")
+                                .addHeader("Content-Type","application/x-www-form-urlencoded; charset=utf-8")
                                 .build());
                     })
 //                 .sslSocketFactory(getSSLSocketFactory())

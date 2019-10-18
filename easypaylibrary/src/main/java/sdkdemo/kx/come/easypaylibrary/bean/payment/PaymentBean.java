@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class PaymentBean implements Serializable {
 
 
-    private int inputCharset;
+    private String inputCharset;
     private String version;
     private int signType;
     private String tradeNature;
@@ -14,7 +14,7 @@ public class PaymentBean implements Serializable {
 
     private SpAdressBean spAdressBean;
 
-    private ext2 ext;
+
 
     private String signMsg;
     private int payType;
@@ -29,7 +29,18 @@ public class PaymentBean implements Serializable {
     private String payerTelephone;
     private String IPAdress;
     private String secretKey;
-
+    private int crdLvl;
+    private int taxAmt;
+    private int custCd;
+    private int mchPostCd;
+    private int taxId;
+    private int mchMinorityCd;
+    private int mchStateCd;
+    private int shipPostCd;
+    private int destPostCd;
+    private int invoiceNum;
+    private int freightAmt;
+    private int dutyAmt;
 
     public BlAdressBean getBlAdressBean() {
         return blAdressBean;
@@ -47,11 +58,11 @@ public class PaymentBean implements Serializable {
         this.spAdressBean = spAdressBean;
     }
 
-    public int getInputCharset() {
+    public String getInputCharset() {
         return inputCharset;
     }
 
-    public void setInputCharset(int inputCharset) {
+    public void setInputCharset(String inputCharset) {
         this.inputCharset = inputCharset;
     }
 
@@ -79,13 +90,7 @@ public class PaymentBean implements Serializable {
         this.tradeNature = tradeNature;
     }
 
-    public ext2 getExt() {
-        return ext;
-    }
 
-    public void setExt(ext2 ext) {
-        this.ext = ext;
-    }
 
     public String getSignMsg() {
         return signMsg;
@@ -191,16 +196,111 @@ public class PaymentBean implements Serializable {
         this.secretKey = secretKey;
     }
 
+    public int getCrdLvl() {
+        return crdLvl;
+    }
+
+    public void setCrdLvl(int crdLvl) {
+        this.crdLvl = crdLvl;
+    }
+
+    public int getTaxAmt() {
+        return taxAmt;
+    }
+
+    public void setTaxAmt(int taxAmt) {
+        this.taxAmt = taxAmt;
+    }
+
+    public int getCustCd() {
+        return custCd;
+    }
+
+    public void setCustCd(int custCd) {
+        this.custCd = custCd;
+    }
+
+    public int getMchPostCd() {
+        return mchPostCd;
+    }
+
+    public void setMchPostCd(int mchPostCd) {
+        this.mchPostCd = mchPostCd;
+    }
+
+    public int getTaxId() {
+        return taxId;
+    }
+
+    public void setTaxId(int taxId) {
+        this.taxId = taxId;
+    }
+
+    public int getMchMinorityCd() {
+        return mchMinorityCd;
+    }
+
+    public void setMchMinorityCd(int mchMinorityCd) {
+        this.mchMinorityCd = mchMinorityCd;
+    }
+
+    public int getMchStateCd() {
+        return mchStateCd;
+    }
+
+    public void setMchStateCd(int mchStateCd) {
+        this.mchStateCd = mchStateCd;
+    }
+
+    public int getShipPostCd() {
+        return shipPostCd;
+    }
+
+    public void setShipPostCd(int shipPostCd) {
+        this.shipPostCd = shipPostCd;
+    }
+
+    public int getDestPostCd() {
+        return destPostCd;
+    }
+
+    public void setDestPostCd(int destPostCd) {
+        this.destPostCd = destPostCd;
+    }
+
+    public int getInvoiceNum() {
+        return invoiceNum;
+    }
+
+    public void setInvoiceNum(int invoiceNum) {
+        this.invoiceNum = invoiceNum;
+    }
+
+    public int getFreightAmt() {
+        return freightAmt;
+    }
+
+    public void setFreightAmt(int freightAmt) {
+        this.freightAmt = freightAmt;
+    }
+
+    public int getDutyAmt() {
+        return dutyAmt;
+    }
+
+    public void setDutyAmt(int dutyAmt) {
+        this.dutyAmt = dutyAmt;
+    }
+
     @Override
     public String toString() {
         return "PaymentBean{" +
-                "inputCharset=" + inputCharset +
+                "inputCharset='" + inputCharset + '\'' +
                 ", version='" + version + '\'' +
                 ", signType=" + signType +
                 ", tradeNature='" + tradeNature + '\'' +
                 ", blAdressBean=" + blAdressBean +
                 ", spAdressBean=" + spAdressBean +
-                ", ext=" + ext +
                 ", signMsg='" + signMsg + '\'' +
                 ", payType=" + payType +
                 ", merchantId='" + merchantId + '\'' +
@@ -214,6 +314,18 @@ public class PaymentBean implements Serializable {
                 ", payerTelephone='" + payerTelephone + '\'' +
                 ", IPAdress='" + IPAdress + '\'' +
                 ", secretKey='" + secretKey + '\'' +
+                ", crdLvl=" + crdLvl +
+                ", taxAmt=" + taxAmt +
+                ", custCd=" + custCd +
+                ", mchPostCd=" + mchPostCd +
+                ", taxId=" + taxId +
+                ", mchMinorityCd=" + mchMinorityCd +
+                ", mchStateCd=" + mchStateCd +
+                ", shipPostCd=" + shipPostCd +
+                ", destPostCd=" + destPostCd +
+                ", invoiceNum=" + invoiceNum +
+                ", freightAmt=" + freightAmt +
+                ", dutyAmt=" + dutyAmt +
                 '}';
     }
 }

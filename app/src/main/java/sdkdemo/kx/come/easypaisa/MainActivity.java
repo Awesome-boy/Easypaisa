@@ -11,7 +11,6 @@ import sdkdemo.kx.come.easypaylibrary.Checkout;
 import sdkdemo.kx.come.easypaylibrary.bean.payment.BlAdressBean;
 import sdkdemo.kx.come.easypaylibrary.bean.payment.PaymentBean;
 import sdkdemo.kx.come.easypaylibrary.bean.payment.SpAdressBean;
-import sdkdemo.kx.come.easypaylibrary.bean.payment.ext2;
 import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
 
 
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
     private PaymentBean setBean() {
         PaymentBean bean=new PaymentBean();
-        bean.setInputCharset(1);
+        bean.setInputCharset("1");
         bean.setVersion("v1.0");
         bean.setSignType(0);
         bean.setTradeNature("GOODS");
@@ -100,20 +99,20 @@ public class MainActivity extends AppCompatActivity {
         bean.setPayerTelephone("13888888888");
         bean.setIPAdress("113.246.97.101");
 
-        ext2 ext=new ext2();
-        ext.setCrdLvl(1);
-        ext.setTaxAmt(1);
-        ext.setCustCd(1);
-        ext.setMchPostCd(1);
-        ext.setTaxId(1);
-        ext.setMchMinorityCd(1);
-        ext.setMchStateCd(1);
-        ext.setShipPostCd(1);
-        ext.setDestPostCd(1);
-        ext.setInvoiceNum(1);
-        ext.setFreightAmt(1);
-        ext.setDutyAmt(1);
-        bean.setExt(ext);
+
+        bean.setCrdLvl(1);
+        bean.setTaxAmt(1);
+        bean.setCustCd(1);
+        bean.setMchPostCd(1);
+        bean.setTaxId(1);
+        bean.setMchMinorityCd(1);
+        bean.setMchStateCd(1);
+        bean.setShipPostCd(1);
+        bean.setDestPostCd(1);
+        bean.setInvoiceNum(1);
+        bean.setFreightAmt(1);
+        bean.setDutyAmt(1);
+
         bean.setSecretKey("ZloDcaGkb1zP9/L7LkgWDA==");
         return  bean;
     }
