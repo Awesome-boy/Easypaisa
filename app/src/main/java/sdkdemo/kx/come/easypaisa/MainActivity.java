@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         bean.setSignMsg("8f0e5fd0b3797194f27f0f547dcf9e0c");
         bean.setPayType(13);
         bean.setMerchantId("010704515311001");
-        bean.setOrderNo("20191017134538");
+        bean.setOrderNo("20191017134539");
         bean.setOrderCurrency("840");
         bean.setOrderDatetime("20191017134537");
         bean.setOrderAmount("0.11");

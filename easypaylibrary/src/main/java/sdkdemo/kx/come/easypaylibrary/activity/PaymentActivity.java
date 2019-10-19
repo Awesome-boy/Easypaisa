@@ -17,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.Map;
 
 import androidx.collection.ArrayMap;
@@ -26,7 +27,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
-import sdkdemo.kx.come.easypaylibrary.RequestJudgement;
 import sdkdemo.kx.come.easypaylibrary.bean.payment.PaymentBean;
 import sdkdemo.kx.come.easypaylibrary.httpService.HttpResponse;
 import sdkdemo.kx.come.easypaylibrary.httpService.RetrofitClient;
@@ -34,7 +34,6 @@ import sdkdemo.kx.come.easypaylibrary.interfaces.PaymentResult;
 import sdkdemo.kx.come.easypaylibrary.layout.CardWebLayout;
 import sdkdemo.kx.come.easypaylibrary.tools.CheckoutTools;
 
-import static sdkdemo.kx.come.easypaylibrary.RequestJudgement.respFilterWithoutTips;
 
 /**
  * Created by xief on 2018/6/12.
@@ -120,7 +119,7 @@ public final class PaymentActivity extends Activity {
                         if (popupwindowDisplayKey) {
                             popupwindowDisplayKey = false;
 
-                                RetrofitClient.getInstance(PaymentActivity.this)
+                            RetrofitClient.getInstance(PaymentActivity.this)
                                     .getApiService()
                                     .getOrder(params)
                                     .subscribeOn(Schedulers.io())
@@ -134,7 +133,11 @@ public final class PaymentActivity extends Activity {
                                         @Override
                                         public void onNext(ResponseBody value) {
                                             Log.i("zt", "onNext:"+value);
-                                            mPaymentResult.successPayment(value.toString());
+                                            try {
+                                                mPaymentResult.successPayment(value.string());
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
                                         }
 
 
