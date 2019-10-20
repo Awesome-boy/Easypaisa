@@ -19,6 +19,14 @@
         </activity>
         <activity android:name="sdkdemo.kx.come.easypaylibrary.activity.WebViewActivity"/>
         <activity android:name="sdkdemo.kx.come.easypaylibrary.activity.PaymentActivity"/>
+        <activity android:name=".PaymentActivity" />
+        <activity android:name=".AuthorizationActivity" />
+        <activity android:name=".GenerateQRActivity" />
+        <activity android:name=".ParseQRActivity" />
+        <activity android:name=".InquiryActivity" />
+        <activity android:name=".VoidActivity" />
+        <activity android:name=".RefundActivity" />
+        <activity android:name=".PreAuthorizationActivity" />
     </application>
 
 </manifest>

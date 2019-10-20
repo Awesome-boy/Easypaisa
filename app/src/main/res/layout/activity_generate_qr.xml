@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_gen_qr"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@id/rl_payment">
+
+    <Button
+        android:id="@+id/btn_confirm"
+        style="@style/InputText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_sign_key"
+        android:text="Submit" />
+
+    <RelativeLayout
+        android:id="@+id/rl_txt_gen_qr_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_txt_gen_qr_1"
+        android:layout_marginTop="5dp">
+
+        <EditText
+            android:id="@+id/et_txt_gen_qr_2"
+            style="@style/InputText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_width"
+            android:background="@drawable/background_edittext"
+            android:paddingStart="@dimen/padding_start"
+            android:text="20191020151154" />
+
+        <TextView
+            style="@style/InputText"
+            android:layout_width="@dimen/text_width"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="Order No." />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_sp_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_txt_gen_qr_2">
+
+        <Spinner
+            android:id="@+id/sp_pay_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_width"
+            android:entries="@array/currency"
+            android:paddingStart="@dimen/padding_start" />
+
+        <TextView
+            style="@style/InputText"
+            android:layout_width="@dimen/text_width"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="Currency" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_txt_gen_qr_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_sp_1"
+        android:layout_marginTop="5dp">
+
+        <EditText
+            android:id="@+id/et_txt_gen_qr_5"
+            style="@style/InputText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_width"
+            android:background="@drawable/background_edittext"
+            android:paddingStart="@dimen/padding_start"
+            android:text="998" />
+
+        <TextView
+            style="@style/InputText"
+            android:layout_width="@dimen/text_width"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="Amount" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_txt_gen_qr_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_txt_gen_qr_5"
+        android:layout_marginTop="5dp">
+
+        <EditText
+            android:id="@+id/et_txt_gen_qr_6"
+            style="@style/InputText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_width"
+            android:background="@drawable/background_edittext"
+            android:paddingStart="@dimen/padding_start"
+            android:text="20191020151954" />
+
+        <TextView
+            style="@style/InputText"
+            android:layout_width="@dimen/text_width"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="Datetime" />
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/rl_sign_key"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_txt_gen_qr_6"
+        android:layout_marginTop="20dp">
+
+        <EditText
+            android:id="@+id/et_sign_key"
+            style="@style/InputText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_width"
+            android:background="@drawable/background_edittext"
+            android:paddingStart="@dimen/padding_start"
+            android:text="ZloDcaGkb1zP9/L7LkgWDA==" />
+
+        <TextView
+            style="@style/InputText"
+            android:layout_width="@dimen/text_width"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="Signature key" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_txt_gen_qr_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title_gen_qr_1"
+        android:layout_marginTop="5dp">
+
+        <EditText
+            android:id="@+id/et_txt_gen_qr_1"
+            style="@style/InputText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_width"
+            android:background="@drawable/background_edittext"
+            android:paddingStart="@dimen/padding_start"
+            android:text="010704515311001" />
+
+        <TextView
+            style="@style/InputText"
+            android:layout_width="@dimen/text_width"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="Merchant No." />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_title_gen_qr_1"
+        style="@style/InputText"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="Generate QR test " />
+</RelativeLayout>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_void"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@id/rl_payment">
+    
+    <RelativeLayout
+        android:id="@+id/rl_txt_void_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title_void_1"
+        android:layout_marginTop="5dp">
+
+        <EditText
+            android:id="@+id/et_txt_void_1"
+            style="@style/InputText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_width"
+            android:background="@drawable/background_edittext"
+            android:paddingStart="@dimen/padding_start"
+            android:text="010704515311001" />
+
+        <TextView
+            style="@style/InputText"
+            android:layout_width="@dimen/text_width"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="Merchant No." />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_txt_void_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_txt_void_1"
+        android:layout_marginTop="5dp">
+
+        <EditText
+            android:id="@+id/et_txt_void_2"
+            style="@style/InputText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_width"
+            android:background="@drawable/background_edittext"
+            android:paddingStart="@dimen/padding_start"
+            android:text="201910293150320" />
+
+        <TextView
+            style="@style/InputText"
+            android:layout_width="@dimen/text_width"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="Order No." />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_txt_void_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_txt_void_2"
+        android:layout_marginTop="5dp">
+
+        <EditText
+            android:id="@+id/et_txt_void_3"
+            style="@style/InputText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_width"
+            android:background="@drawable/background_edittext"
+            android:paddingStart="@dimen/padding_start"
+            android:text="201910293150721" />
+
+        <TextView
+            style="@style/InputText"
+            android:layout_width="@dimen/text_width"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="Datetime" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_txt_void_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_txt_void_3"
+        android:layout_marginTop="5dp"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/et_txt_void_4"
+            style="@style/InputText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_width"
+            android:background="@drawable/background_edittext"
+            android:paddingStart="@dimen/padding_start"
+            android:text="0.1" />
+
+        <TextView
+            style="@style/InputText"
+            android:layout_width="@dimen/text_width"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="void Amount" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_txt_void_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_txt_void_4"
+        android:layout_marginTop="5dp">
+
+        <EditText
+            android:id="@+id/et_txt_void_5"
+            style="@style/InputText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_width"
+            android:background="@drawable/background_edittext"
+            android:paddingStart="@dimen/padding_start"
+            android:text="" />
+
+        <TextView
+            style="@style/InputText"
+            android:layout_width="@dimen/text_width"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="Original Order No." />
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_title_void_1"
+        style="@style/InputText"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="void test " />
+
+    <RelativeLayout
+        android:id="@+id/rl_sign_key"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_txt_void_5"
+        android:layout_marginTop="20dp">
+
+        <EditText
+            android:id="@+id/et_sign_key"
+            style="@style/InputText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_width"
+            android:background="@drawable/background_edittext"
+            android:paddingStart="@dimen/padding_start"
+            android:text="ZloDcaGkb1zP9/L7LkgWDA==" />
+
+        <TextView
+            style="@style/InputText"
+            android:layout_width="@dimen/text_width"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="Signature key" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/InputText"
+        android:text="Confirm void"
+        android:layout_below="@id/rl_sign_key"/>
+</RelativeLayout>

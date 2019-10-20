@@ -1,0 +1,1286 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        
+        <RelativeLayout
+            android:visibility="visible"
+            android:id="@+id/rl_payment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tb_payment">
+
+            <RelativeLayout
+                android:id="@+id/rl_sp_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_title_1">
+
+                <Spinner
+                    android:id="@+id/sp_pay_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:entries="@array/paymenttype"
+                    android:paddingStart="@dimen/padding_start" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Payment Type" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_sp_1"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_mer_no"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="010704515311001" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Merchant No." />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_1"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_order_no"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="20191018174733" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Order No." />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_sp_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_2"
+                android:layout_marginTop="5dp">
+
+                <Spinner
+                    android:id="@+id/sp_currency"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:entries="@array/currency"
+                    android:paddingStart="@dimen/padding_start" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Currency" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_sp_2"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_3"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="0.11" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Amount" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_3"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_4"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="20191018174733" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="DateTime" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_4"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_5"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="http://sd.coshine.com:80/gateway/tests/payment_result.jsp" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Redirect URL" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_5"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_6"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="http://sd.coshine.com:80/gateway/tests/payment_callback.jsp" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Notification URL" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_6"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_7"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="paygwy@test.com" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Email" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_7"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_8"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="13888888888" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Telephone" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_8"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_9"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="113.246.97.101" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="IP Address" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_title_1"
+                style="@style/InputText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="Payment Test" />
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_exttl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/rl_payment">
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_exttl_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_title_exttl_1"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_exttl_1"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="Test" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Cardholder first name" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_exttl_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_exttl_1"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_exttl_2"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="Test" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Cardholder last name" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_exttl_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_exttl_2"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_exttl_3"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="5264711000319246" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Card No." />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_exttl_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_exttl_5"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_exttl_4"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="789" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="CVV2" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_exttl_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_exttl_3"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_exttl_5"
+                    style="@style/InputText"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="789" />
+                <EditText
+                    android:id="@+id/et_txt_exttl_5_1"
+                    style="@style/InputText"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/et_txt_exttl_5"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="789" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/InputText"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@id/et_txt_exttl_5_1"
+                    android:text="Format: MM YY"/>
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Card expiration date" />
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tv_title_exttl_1"
+                style="@style/InputText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="extTL " />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_ext2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/rl_exttl"
+            android:visibility="visible">
+
+            <RelativeLayout
+                android:id="@+id/rl_sp_ext2_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_title_ext2_1">
+
+                <Spinner
+                    android:id="@+id/sp_ext2_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:entries="@array/card_level"
+                    android:paddingStart="@dimen/padding_start" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Card Level" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_ext2_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_sp_ext2_1"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_ext2_1"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="1" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Tax Amount" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_ext_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_ext2_1"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_ext_2"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="1" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Customer Code" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_ext_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_ext_11"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_ext_3"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="1" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Tax Identification" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_ext_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_ext_3"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_ext_4"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="1" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Merchant Minority Code" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_ext_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_ext_4"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_ext_5"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="1" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Merchant State Code" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_ext_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_ext_5"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_ext_6"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="1" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Ship from Postal Code" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_ext_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_ext_6"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_ext_7"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="1" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Destination Postal Code" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_ext_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_ext_7"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_ext_8"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="1" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Invoice Number" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_ext_9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_ext_8"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_ext_9"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="1" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Freight Amount" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_ext_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_ext_9"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_ext_10"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="1" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Duty Amount" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_ext_11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_ext_2"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_ext_11"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="1" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Merchant Postal Code" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_ext2_12"
+                android:layout_width="match_parent"
+                android:layout_below="@id/rl_txt_ext_10"
+                android:layout_height="wrap_content">
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Order Items" />f
+                <EditText
+                    android:id="@+id/et_txt_ext_12"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="item1:1,1,1;item2:" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_title_ext2_1"
+                style="@style/InputText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="ext2" />
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_shipping_address"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/rl_ext2">
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_shipping_address_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_title_shipping_address_1"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_shipping_address_1"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="john" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="first name" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_shipping_address_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_shipping_address_7"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_shipping_address_2"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="Muster Str. 12" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="address1" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_shipping_address_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_shipping_address_8"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_shipping_address_3"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="10178" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="zip code" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_shipping_address_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_shipping_address_3"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_shipping_address_4"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="Los Angeles" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="city" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_shipping_address_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_shipping_address_4"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_shipping_address_5"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="CA" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="state" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_shipping_address_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_shipping_address_5"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_shipping_address_6"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="US" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="country" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rl_txt_shipping_address_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_shipping_address_1"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_shipping_address_7"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="connor" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="last name" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rl_txt_shipping_address_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_shipping_address_2"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_shipping_address_8"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="address2" />
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tv_title_shipping_address_1"
+                style="@style/InputText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="Shipping Address " />
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_billing_address"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/rl_shipping_address">
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_billing_address_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_title_billing_address_1"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_billing_address_1"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="john" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="first name" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_billing_address_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_billing_address_7"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_billing_address_2"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="Muster Str. 12" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="address1" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_billing_address_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_billing_address_8"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_billing_address_3"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="10178" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="zip code" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_billing_address_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_billing_address_3"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_billing_address_4"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="Los Angeles" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="city" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_billing_address_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_billing_address_4"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_billing_address_5"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="CA" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="state" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_billing_address_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_billing_address_5"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_billing_address_6"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="US" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="country" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rl_txt_billing_address_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_billing_address_1"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_billing_address_7"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="connor" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="last name" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_txt_billing_address_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_billing_address_2"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/et_txt_billing_address_8"
+                    style="@style/InputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/text_width"
+                    android:background="@drawable/background_edittext"
+                    android:paddingStart="@dimen/padding_start"
+                    android:text="" />
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="address2" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_title_billing_address_1"
+                style="@style/InputText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="Billing Address " />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_sign_key"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_billing_address"
+            android:layout_marginTop="20dp">
+
+            <EditText
+                android:id="@+id/et_sign_key"
+                style="@style/InputText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_width"
+                android:background="@drawable/background_edittext"
+                android:paddingStart="@dimen/padding_start"
+                android:text="ZloDcaGkb1zP9/L7LkgWDA==" />
+
+            <TextView
+                style="@style/InputText"
+                android:layout_width="@dimen/text_width"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="Signature key" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/InputText"
+            android:text="Confirm Payment"
+            android:layout_below="@id/rl_sign_key"/>
+
+
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tb_payment"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payment"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </RelativeLayout>
+</ScrollView>

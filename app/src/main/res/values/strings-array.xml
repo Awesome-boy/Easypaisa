@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <string-array name="paymenttype">
+
+        <item>13 - purchase</item>
+        <item>14 - preauthorization</item>
+    </string-array>
+
+    <string-array name="currency">
+
+        <item>USD</item>
+        <item>RUB</item>
+        <item>EUR</item>
+    </string-array>
+
+    <string-array name="card_level">
+
+        <item>Level1</item>
+        <item>Level2</item>
+        <item>Level3</item>
+    </string-array>
+
+    <string-array name="action">
+
+        <item>Confirm</item>
+        <item>Cancel</item>
+    </string-array>
+</resources>
