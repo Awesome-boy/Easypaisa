@@ -1,11 +1,18 @@
 package sdkdemo.kx.come.easypaisa;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import sdkdemo.kx.come.easypaylibrary.Checkout;
+import sdkdemo.kx.come.easypaylibrary.activity.WebViewActivity;
+import sdkdemo.kx.come.easypaylibrary.bean.base.authorization.AuthorizationBean;
+import sdkdemo.kx.come.easypaylibrary.bean.base.query.QueryBean;
+import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
 
 public class InquiryActivity extends BaseActivity {
 
@@ -19,6 +26,41 @@ public class InquiryActivity extends BaseActivity {
 
     @OnClick(R.id.btn_confirm)
     protected void onClick() {
+        sendRequest();
+    }
+
+    private void sendRequest() {
+        QueryBean bean = setBean();
+        Log.d("zt", "zt--" + bean.toString());
+        Checkout.getInstance().queryResult(InquiryActivity.this, bean, new CheckoutCallback() {
+            @Override
+            public void onCancel(String mResultMessage) {
+                Log.i("zt", "onCancel:" + mResultMessage);
+            }
+
+            @Override
+            public void onSuccess(String mResultMessage) {
+                Log.i("zt", "onSuccess:" + mResultMessage);
+
+            }
+
+            @Override
+            public void onError(String mResultMessage) {
+                Log.i("zt", "onError:" + mResultMessage);
+            }
+        });
+    }
+
+    private QueryBean setBean() {
+        QueryBean bean=new QueryBean();
+        bean.setVersion("v1.0");
+        bean.setSignType("0");
+        bean.setOrderNo("20191017142940");
+        bean.setMerchantId("010704515311001");
+        bean.setOrderDatetime("20191017144357");
+        bean.setQueryDatetime("20191017144357");
+        bean.setSecretKey("ZloDcaGkb1zP9%2FL7LkgWDA%3D%3D");
+        return bean;
 
     }
 

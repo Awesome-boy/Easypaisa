@@ -122,7 +122,7 @@ public class ParamsTools {
 
     }
 
-    public static Map<String,String> revoid(VoidBean bean) {
+    public static Map<String,String> reback(VoidBean bean) {
         Map<String, String> params = new ArrayMap<>();
         if (bean!=null){
             params.put("version", bean.getVersion());

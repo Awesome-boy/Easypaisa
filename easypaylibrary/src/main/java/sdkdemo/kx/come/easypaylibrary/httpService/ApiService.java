@@ -34,7 +34,7 @@ public interface ApiService {
     //退回
     @FormUrlEncoded
     @POST("tests/void.jsp")
-    Observable<ResponseBody> revoid(@FieldMap Map<String, String> map);
+    Observable<ResponseBody> reback(@FieldMap Map<String, String> map);
 
 
     //订单检查

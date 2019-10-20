@@ -190,13 +190,13 @@ public final class Checkout{
     }
 
 
-    public void revoid(Activity mActivity, VoidBean bean, CheckoutCallback mListener) {
+    public void reback(Activity mActivity, VoidBean bean, CheckoutCallback mListener) {
         Callback.setCheckoutCallback(mListener);
         PaymentResult mPaymentResult=new PaymentResult(mActivity);
-        Map<String,String> params=ParamsTools.revoid(bean);
+        Map<String,String> params=ParamsTools.reback(bean);
         RetrofitClient.getInstance(mActivity)
                 .getApiService()
-                .revoid(params)
+                .reback(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
