@@ -4,13 +4,33 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+
+import java.io.IOException;
+import java.util.Map;
+
+import androidx.collection.ArrayMap;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
 import sdkdemo.kx.come.easypaylibrary.activity.PaymentActivity;
-import sdkdemo.kx.come.easypaylibrary.bean.payment.PaymentBean;
+import sdkdemo.kx.come.easypaylibrary.bean.base.order.OrderCheckBean;
+import sdkdemo.kx.come.easypaylibrary.bean.base.payment.PaymentBean;
+import sdkdemo.kx.come.easypaylibrary.bean.base.authorization.AuthorizationBean;
+import sdkdemo.kx.come.easypaylibrary.bean.base.query.QueryBean;
+import sdkdemo.kx.come.easypaylibrary.bean.base.reback.VoidBean;
+import sdkdemo.kx.come.easypaylibrary.bean.base.refund.RefundBean;
+import sdkdemo.kx.come.easypaylibrary.httpService.RetrofitClient;
 import sdkdemo.kx.come.easypaylibrary.interfaces.Callback;
 import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
+import sdkdemo.kx.come.easypaylibrary.interfaces.PaymentResult;
 import sdkdemo.kx.come.easypaylibrary.tools.CheckoutTools;
+import sdkdemo.kx.come.easypaylibrary.tools.ParamsTools;
 
 
 /**
@@ -21,83 +41,12 @@ public final class Checkout{
 
     private static Checkout mCheckout;
 
-    private String md5Key;
-    private String mMerchantMID;
-
-
-    /**
-     * 收银台支付
-     */
-    public static final int CARD_URL_PAYMENT_TPYE = 323;
-    /**
-     * 收银台支付-预授权
-     */
-    public static final int CARD_URL_AUTH_PAYMENT_TPYE = 324;
-    /**
-     * 两方支付
-     */
-    public static final int CARD_CAMP_PAYMENT_TPYE = 325;
-    /**
-     * 两方支付-预授权
-     */
-    public static final int CARD_CAMP_AUTH_PAYMENT_TPYE = 326;
-    /**
-     * 创建token支付
-     */
-    public static final int CARD_TOKEN_CREATE_TPYE = 327;
-    /**
-     * 使用token支付
-     */
-    public static final int CARD_TOKEN_PAYMENT_TPYE = 328;
     public Intent mGoopayIntent;
 
     private Checkout() {
 
     }
 
-    /**
-     * @param
-     * @param
-     * @throws
-     */
-//    public static void initialize(Context mContext, String md5Key) throws CheckoutException {
-//        ApplicationInfo info = null;
-//        try {
-//            info = mContext.getPackageManager()
-//                    .getApplicationInfo(mContext.getPackageName(), PackageManager.GET_META_DATA);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        if (info != null) {
-//            Object merchantMID = info.metaData.get(CheckoutTools.CHECKOUT_MERCHANT);
-//            if (merchantMID == null || merchantMID.equals("")) {
-//                throw new CheckoutException(CheckoutException.EXCEPTION_NOT_MERCHANT_ID);
-//            }
-//            if (md5Key == null || md5Key.equals("")) {
-//                throw new CheckoutException(CheckoutException.EXCEPTION_NOT_MD5_KEY);
-//            }
-//            if (mCheckout == null) {
-//                mCheckout = new Checkout();
-//            }
-//            try {
-//                String debug = info.metaData.getString(CheckoutTools.CHECKOUT_DEBUG);
-//                if (CheckoutTools.FORMAL_ENVIRONMENT.equals(debug)) {
-//                    Logs.isDebug = false;
-//                } else if (CheckoutTools.SANDBOX_ENVIRONMENT.equals(debug)) {
-//                    Logs.isDebug = true;
-//                } else {
-//                    throw new CheckoutException(CheckoutException.EXCEPTION_NOT_DEBUG_KEY);
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//                Logs.isDebug = true;
-//            }
-//            mCheckout.setMerchantMID(merchantMID.toString());
-//            Logs.i("MERCHANT ID : " + merchantMID);
-//            mCheckout.setMd5Key(md5Key);
-//            Logs.i("MD5 KEY : " + md5Key);
-//        }
-//    }
 
     public static Checkout getInstance()  {
         if (mCheckout == null) {
@@ -106,25 +55,12 @@ public final class Checkout{
         return mCheckout;
     }
 
-    /**
-     * @param md5Key
-     */
-    private void setMd5Key(String md5Key) {
-        this.md5Key = md5Key;
-    }
-
-    /**
-     * @param mMerchantMID
-     */
-    private void setMerchantMID(String mMerchantMID) {
-        this.mMerchantMID = mMerchantMID;
-    }
 
     /**
      * @param mActivity
      * @param mListener
      */
-    public  void toCheckout(Activity mActivity, PaymentBean bean, CheckoutCallback mListener) {
+    public  void setPayment(Activity mActivity, PaymentBean bean, CheckoutCallback mListener) {
         Callback.setCheckoutCallback(mListener);
         if (mGoopayIntent == null) {
             mGoopayIntent = new Intent();
@@ -134,43 +70,211 @@ public final class Checkout{
         mActivity.startActivity(mGoopayIntent);
         mActivity.overridePendingTransition(android.R.anim.fade_in, 0);
 
-
     }
 
-    /**
-     * @param mActivity
-     * @param mInfo
-     * @param mListener
-     * @return
-     */
-//    private boolean toPay(Activity mActivity, PayInfo mInfo, CheckoutCallback mListener) {
-//        if (OrderJudgement.stringDetectionNull(mMerchantMID) || OrderJudgement.stringDetectionNull(md5Key)) {
-//            try {
-//                throw new CheckoutException(CheckoutException.EXCEPTION_INIT);
-//            } catch (CheckoutException e) {
-//                e.printStackTrace();
-//            }
-//            return false;
-//        }
-//        if (!isOpenNetwork(mActivity)) {
-//            return false;
-//        }
-//        if (!checkPayInfo(mActivity, mInfo)) {
-//            return false;
-//        }
-//        if (mAllPayment == null) {
-//            mAllPayment = new AllPayment();
-//        }
-//        if (mListener == null) {
-//            Log.e(Logs.TAG, "CheckoutCallback:>Listener is Null!");
-//            return false;
-//        }
-//        mInfo.setMerchantID(mMerchantMID);
-//        mInfo.setMd5Key(md5Key);
-//        mInfo.setHttpKey(Logs.isDebug);
-//        Callback.setCheckoutCallback(mListener);
-//        return true;
-//    }
+    public void setAuthorization(Activity mActivity, AuthorizationBean bean, CheckoutCallback mListener) {
+        Callback.setCheckoutCallback(mListener);
+        PaymentResult mPaymentResult=new PaymentResult(mActivity);
+        Map<String,String> params=ParamsTools.authorizationParams(bean);
+        RetrofitClient.getInstance(mActivity)
+                .getApiService()
+                .setAuthorization(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.i("zt", "onSubscribe:");
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody value) {
+                        Log.i("zt", "onNext:"+value);
+                        try {
+                            mPaymentResult.successPayment(value.string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("zt", "onError:" + e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.i("zt", "onComplete:");
+
+                    }
+                });
+    }
+
+    public void queryResult(Activity mActivity, QueryBean bean, CheckoutCallback mListener) {
+        Callback.setCheckoutCallback(mListener);
+        PaymentResult mPaymentResult=new PaymentResult(mActivity);
+        Map<String,String> params=ParamsTools.query(bean);
+        RetrofitClient.getInstance(mActivity)
+                .getApiService()
+                .query(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.i("zt", "onSubscribe:");
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody value) {
+                        Log.i("zt", "onNext:"+value);
+                        try {
+                            mPaymentResult.successPayment(value.string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("zt", "onError:" + e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.i("zt", "onComplete:");
+
+                    }
+                });
+    }
+
+    public void refundResult(Activity mActivity, RefundBean bean, CheckoutCallback mListener) {
+        Callback.setCheckoutCallback(mListener);
+        PaymentResult mPaymentResult=new PaymentResult(mActivity);
+        Map<String,String> params=ParamsTools.refund(bean);
+        RetrofitClient.getInstance(mActivity)
+                .getApiService()
+                .refund(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.i("zt", "onSubscribe:");
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody value) {
+                        Log.i("zt", "onNext:"+value);
+                        try {
+                            mPaymentResult.successPayment(value.string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("zt", "onError:" + e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.i("zt", "onComplete:");
+
+                    }
+                });
+    }
+
+
+    public void revoid(Activity mActivity, VoidBean bean, CheckoutCallback mListener) {
+        Callback.setCheckoutCallback(mListener);
+        PaymentResult mPaymentResult=new PaymentResult(mActivity);
+        Map<String,String> params=ParamsTools.revoid(bean);
+        RetrofitClient.getInstance(mActivity)
+                .getApiService()
+                .revoid(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.i("zt", "onSubscribe:");
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody value) {
+                        Log.i("zt", "onNext:"+value);
+                        try {
+                            mPaymentResult.successPayment(value.string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("zt", "onError:" + e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.i("zt", "onComplete:");
+
+                    }
+                });
+    }
+
+
+    public void orderCheck(Activity mActivity, OrderCheckBean bean, CheckoutCallback mListener) {
+        Callback.setCheckoutCallback(mListener);
+        PaymentResult mPaymentResult=new PaymentResult(mActivity);
+        Map<String,String> params=ParamsTools.orderCheck(bean);
+        RetrofitClient.getInstance(mActivity)
+                .getApiService()
+                .orderCheck(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.i("zt", "onSubscribe:");
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody value) {
+                        Log.i("zt", "onNext:"+value);
+                        try {
+                            mPaymentResult.successPayment(value.string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("zt", "onError:" + e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.i("zt", "onComplete:");
+
+                    }
+                });
+    }
+
+
+
+
+
+
+
 
 
 

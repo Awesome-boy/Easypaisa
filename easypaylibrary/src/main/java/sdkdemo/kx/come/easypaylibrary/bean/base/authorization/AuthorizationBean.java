@@ -1,8 +1,11 @@
-package sdkdemo.kx.come.easypaylibrary.bean.payment;
+package sdkdemo.kx.come.easypaylibrary.bean.base.authorization;
 
 import java.io.Serializable;
 
-public class PaymentBean implements Serializable {
+import sdkdemo.kx.come.easypaylibrary.bean.base.BlAdressBean;
+import sdkdemo.kx.come.easypaylibrary.bean.base.SpAdressBean;
+
+public class AuthorizationBean implements Serializable {
 
 
     private String inputCharset;
@@ -23,6 +26,7 @@ public class PaymentBean implements Serializable {
     private String orderAmount;
     private String orderCurrency;
     private String orderDatetime;
+    private String extTL;
     private String pickupUrl;
     private String receiveUrl;
     private String payerEmail;
@@ -292,9 +296,17 @@ public class PaymentBean implements Serializable {
         this.dutyAmt = dutyAmt;
     }
 
+    public String getExtTL() {
+        return extTL;
+    }
+
+    public void setExtTL(String extTL) {
+        this.extTL = extTL;
+    }
+
     @Override
     public String toString() {
-        return "PaymentBean{" +
+        return "AuthorizationBean{" +
                 "inputCharset='" + inputCharset + '\'' +
                 ", version='" + version + '\'' +
                 ", signType=" + signType +
@@ -308,6 +320,7 @@ public class PaymentBean implements Serializable {
                 ", orderAmount='" + orderAmount + '\'' +
                 ", orderCurrency='" + orderCurrency + '\'' +
                 ", orderDatetime='" + orderDatetime + '\'' +
+                ", extTL='" + extTL + '\'' +
                 ", pickupUrl='" + pickupUrl + '\'' +
                 ", receiveUrl='" + receiveUrl + '\'' +
                 ", payerEmail='" + payerEmail + '\'' +

@@ -1,9 +1,8 @@
-package sdkdemo.kx.come.easypaylibrary.bean.payment;
-
+package sdkdemo.kx.come.easypaylibrary.bean.base;
 
 import java.io.Serializable;
 
-public class SpAdressBean implements Serializable {
+public class BlAdressBean implements Serializable {
     private String firstName;
     private String lastName;
     private String address1;

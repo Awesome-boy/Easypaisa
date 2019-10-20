@@ -20,6 +20,7 @@ public class VoidActivity extends BaseActivity {
     @OnClick(R.id.btn_confirm)
     protected void onClick() {
 
+
     }
 
     @Override

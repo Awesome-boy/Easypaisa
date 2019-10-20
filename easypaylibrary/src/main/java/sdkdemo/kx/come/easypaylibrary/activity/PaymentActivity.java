@@ -10,29 +10,22 @@ import android.view.ViewTreeObserver;
 
 
 import com.alibaba.fastjson.JSON;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Map;
 
 import androidx.collection.ArrayMap;
-import androidx.lifecycle.Lifecycle;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
-import sdkdemo.kx.come.easypaylibrary.bean.payment.PaymentBean;
-import sdkdemo.kx.come.easypaylibrary.httpService.HttpResponse;
+import sdkdemo.kx.come.easypaylibrary.bean.base.payment.PaymentBean;
 import sdkdemo.kx.come.easypaylibrary.httpService.RetrofitClient;
 import sdkdemo.kx.come.easypaylibrary.interfaces.PaymentResult;
 import sdkdemo.kx.come.easypaylibrary.layout.CardWebLayout;
 import sdkdemo.kx.come.easypaylibrary.tools.CheckoutTools;
+import sdkdemo.kx.come.easypaylibrary.tools.ParamsTools;
 
 
 /**
@@ -61,48 +54,12 @@ public final class PaymentActivity extends Activity {
     private void init() {
         bean = (PaymentBean) getIntent().getSerializableExtra(CheckoutTools.INFO);
         mPaymentResult = new PaymentResult(PaymentActivity.this);
-        params = setParams();
+        params = ParamsTools.setParams(bean);
         initListener();
 
     }
 
-    private Map<String,String> setParams() {
-        Map<String, String> params = new ArrayMap<>();
-        if (bean!=null){
-            params.put("inputCharset", bean.getInputCharset());
-            params.put("version", bean.getVersion());
-            params.put("signType", String.valueOf(bean.getSignType()));
-            params.put("tradeNature",bean.getTradeNature()  );
-            params.put("billingAddress",  JSON.toJSONString(bean.getBlAdressBean()));
-            params.put("shippingAddress", JSON.toJSONString(bean.getSpAdressBean()) );
-            params.put("signMsg", bean.getSignMsg() );
-            params.put("payType", String.valueOf(bean.getPayType()));
-            params.put("merchantId", bean.getMerchantId() );
-            params.put("orderNo", bean.getOrderNo() );
-            params.put("orderCurrency", bean.getOrderCurrency() );
-            params.put("orderAmount", bean.getOrderAmount() );
-            params.put("orderDatetime",bean.getOrderDatetime()  );
-            params.put("pickupUrl", bean.getPickupUrl() );
-            params.put("receiveUrl", bean.getReceiveUrl() );
-            params.put("payerEmail", bean.getPayerEmail() );
-            params.put("payerTelephone",bean.getPayerTelephone()  );
-            params.put("IPAddress", bean.getIPAdress() );
-            params.put("crdLvl", String.valueOf(bean.getCrdLvl()));
-            params.put("taxAmt", String.valueOf(bean.getTaxAmt()));
-            params.put("custCd", String.valueOf(bean.getCustCd()));
-            params.put("mchPostCd", String.valueOf(bean.getMchPostCd()));
-            params.put("taxId", String.valueOf(bean.getTaxId()));
-            params.put("mchMinorityCd",  String.valueOf(bean.getMchMinorityCd()));
-            params.put("mchStateCd",  String.valueOf(bean.getMchStateCd()));
-            params.put("shipPostCd",  String.valueOf(bean.getShipPostCd()));
-            params.put("destPostCd", String.valueOf(bean.getDestPostCd()) );
-            params.put("invoiceNum",  String.valueOf(bean.getInvoiceNum()));
-            params.put("freightAmt", String.valueOf(bean.getFreightAmt()) );
-            params.put("dutyAmt", String.valueOf(bean.getDutyAmt()) );
-            params.put("secretKey", bean.getSecretKey() );
-        }
-        return params;
-    }
+
 
     @Override
     public void onBackPressed() {
