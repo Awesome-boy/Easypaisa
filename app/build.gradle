@@ -15,6 +15,15 @@ android {
 
     }
 
+    signingConfigs{
+        release{
+            storeFile file("/Users/annawang/AndroidStudioProjects/paymentsdk2/Easypaisa/paymentsdk.keystore")
+            storePassword "android"
+            keyAlias "paymentsdk"
+            keyPassword "android"
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -22,7 +31,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
