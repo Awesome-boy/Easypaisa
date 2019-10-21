@@ -81,11 +81,11 @@ public class GenerateQRActivity extends BaseActivity {
         GenQRBean bean=new GenQRBean();
         bean.setSignType("0");
         bean.setVersion("v1.0");
-        bean.setMerchantId("010704515311001");
-        bean.setOrderDatetime("20191021095212");
-        bean.setOrderNo("20191019191954");
-        bean.setCurrency("840");
-        bean.setAmount("998");
+        bean.setMerchantId(parseViewText(mETTxtGenQR1));
+        bean.setOrderDatetime(parseViewText(mETTxtGenQR6));
+        bean.setOrderNo(parseViewText(mETTxtGenQR2));
+        bean.setCurrency(mCurrency);
+        bean.setAmount(parseViewText(mETTxtGenQR5));
         bean.setSecretKey("ZloDcaGkb1zP9%2FL7LkgWDA%3D%3D");
         return bean;
 

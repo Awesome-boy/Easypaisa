@@ -57,7 +57,6 @@ public class InquiryActivity extends BaseActivity {
                 Log.i("zt", "onSuccess:" + mResultMessage);
                 Intent intent = new Intent(InquiryActivity.this, WebViewActivity.class);
                 intent.putExtra("data", mResultMessage);
-                intent.putExtra("url",ApiService.BASE_URL+"tests/query_result.jsp");
                 startActivity(intent);
 
             }

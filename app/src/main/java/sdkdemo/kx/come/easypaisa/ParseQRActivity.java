@@ -70,9 +70,11 @@ public class ParseQRActivity extends BaseActivity {
         ParseQRBean bean=new ParseQRBean();
         bean.setSignType("0");
         bean.setVersion("v1.0");
-        bean.setMerchantId("010704515311001");
-        bean.setOrderDatetime("20191021095212");
-        bean.setTerminalId("12345678");
+        bean.setMerchantId(parseViewText(mETTxtParseQR1));
+        bean.setOrderDatetime(parseViewText(mETTxtParseQR5));
+        bean.setTerminalId(parseViewText(mETTxtParseQR2));
+        //00020101021204150107045153110015204531153038405405998.05802NG5919Circle+Trade+Co+Ltd6012Lagos+Island61064200006237011420191021095154061501070451531100164450002ZH0119Circle+Trade+Co+Ltd0212Lagos+Island6304B441
+//        bean.setQRcode(parseViewText(mETTxtParseQR3));
         bean.setQRcode("00020101021204150107045153110015204531153038405405998.05802NG5919Circle+Trade+Co+Ltd6012Lagos+Island61064200006237011420191021095154061501070451531100164450002ZH0119Circle+Trade+Co+Ltd0212Lagos+Island6304B441");
         bean.setSecretKey("ZloDcaGkb1zP9%2FL7LkgWDA%3D%3D");
         return bean;
