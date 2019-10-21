@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rl_refund"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -164,11 +165,29 @@
             android:text="Signature key" />
     </RelativeLayout>
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_payment"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Refund"
+            android:textColor="#000"
+            android:textSize="18sp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
     <Button
         android:id="@+id/btn_confirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/InputText"
+        style="@style/ButtonStyle"
         android:text="Confirm Refund"
         android:layout_below="@id/rl_sign_key"/>
 </RelativeLayout>

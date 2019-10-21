@@ -169,7 +169,7 @@
         android:id="@+id/btn_confirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/InputText"
+        style="@style/ButtonStyle"
         android:text="Confirm void"
         android:layout_below="@id/rl_sign_key"/>
 </RelativeLayout>

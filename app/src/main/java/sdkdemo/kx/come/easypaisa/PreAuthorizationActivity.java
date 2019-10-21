@@ -2,17 +2,36 @@ package sdkdemo.kx.come.easypaisa;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnItemSelected;
 import sdkdemo.kx.come.easypaylibrary.Checkout;
 import sdkdemo.kx.come.easypaylibrary.bean.base.order.OrderCheckBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.refund.RefundBean;
 import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
 
 public class PreAuthorizationActivity extends BaseActivity {
+
+    @BindView(R.id.sp_pay_type)
+    Spinner mSpinner;
+
+    private String mAction = "confirm";
+
+    @BindView(R.id.et_sign_key)
+    EditText mETSignKey;
+    @BindView(R.id.et_txt_pre_authorization_1)
+    EditText mETTxtPreAuthorization1;
+    @BindView(R.id.et_txt_pre_authorization_2)
+    EditText mETTxtPreAuthorization2;
+    @BindView(R.id.et_txt_pre_authorization_5)
+    EditText mETTxtPreAuthorization5;
 
 
     @Override
@@ -26,6 +45,13 @@ public class PreAuthorizationActivity extends BaseActivity {
     protected void onClick() {
         sendRequest();
     }
+
+    @OnItemSelected(R.id.sp_pay_type)
+    protected void onItemSelected(View view, int position) {
+        String[] actions = getResources().getStringArray(R.array.action);
+        mAction = actions[position];
+    }
+
 
     private void sendRequest() {
         OrderCheckBean bean = setBean();
@@ -52,11 +78,11 @@ public class PreAuthorizationActivity extends BaseActivity {
         OrderCheckBean bean=new OrderCheckBean();
         bean.setVersion("v1.0");
         bean.setSignType("0");
-        bean.setOrderNo("20191017142940");
-        bean.setMerchantId("010704515311001");
-        bean.setAction("cancel");
-        bean.setCheckDatetime("20191017153817");
-        bean.setSecretKey("ZloDcaGkb1zP9%2FL7LkgWDA%3D%3D");
+        bean.setOrderNo(parseViewText(mETTxtPreAuthorization2));
+        bean.setMerchantId(parseViewText(mETTxtPreAuthorization1));
+        bean.setAction(mAction);
+        bean.setCheckDatetime(parseViewText(mETTxtPreAuthorization5));
+        bean.setSecretKey(parseViewText(mETSignKey));
         return bean;
     }
 

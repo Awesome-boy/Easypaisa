@@ -2,9 +2,11 @@ package sdkdemo.kx.come.easypaisa;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import sdkdemo.kx.come.easypaylibrary.Checkout;
@@ -14,6 +16,20 @@ import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
 
 public class VoidActivity extends BaseActivity {
 
+
+    @BindView(R.id.et_sign_key)
+    EditText mETSignKey;
+
+    @BindView(R.id.et_txt_void_1)
+    EditText mETTxtVoid1;
+    @BindView(R.id.et_txt_void_2)
+    EditText mETTxtVoid2;
+    @BindView(R.id.et_txt_void_3)
+    EditText mETTxtVoid3;
+    @BindView(R.id.et_txt_void_4)
+    EditText mETTxtVoid4;
+    @BindView(R.id.et_txt_void_5)
+    EditText mETTxtVoid5;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,11 +69,11 @@ public class VoidActivity extends BaseActivity {
         VoidBean bean=new VoidBean();
         bean.setVersion("v1.0");
         bean.setSignType("0");
-        bean.setOrderNo("20191017142940");
-        bean.setMerchantId("010704515311001");
-        bean.setOrderDatetime("20191017144357");
-        bean.setOriginalOrderNo("20191017142940");
-        bean.setSecretKey("ZloDcaGkb1zP9%2FL7LkgWDA%3D%3D");
+        bean.setOrderNo(parseViewText(mETTxtVoid2));
+        bean.setMerchantId(parseViewText(mETTxtVoid1));
+        bean.setOrderDatetime(parseViewText(mETTxtVoid3));
+        bean.setOriginalOrderNo(parseViewText(mETTxtVoid5));
+        bean.setSecretKey(parseViewText(mETSignKey));
         return bean;
     }
 
