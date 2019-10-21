@@ -15,7 +15,8 @@
             android:id="@+id/rl_payment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/tb_payment">
+            android:layout_below="@id/tb_payment"
+            android:padding="8dp">
 
             <RelativeLayout
                 android:id="@+id/rl_sp_1"
@@ -290,6 +291,7 @@
             <TextView
                 android:id="@+id/tv_title_1"
                 style="@style/InputText"
+                android:background="@color/colorPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
@@ -298,6 +300,7 @@
 
         </RelativeLayout>
         <RelativeLayout
+            android:padding="8dp"
             android:id="@+id/rl_exttl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -446,6 +449,7 @@
 
 
             <TextView
+                android:background="@color/colorPrimary"
                 android:id="@+id/tv_title_exttl_1"
                 style="@style/InputText"
                 android:layout_width="match_parent"
@@ -457,6 +461,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:padding="8dp"
             android:id="@+id/rl_ext2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -785,6 +790,7 @@
             </RelativeLayout>
 
             <TextView
+                android:background="@color/colorPrimary"
                 android:id="@+id/tv_title_ext2_1"
                 style="@style/InputText"
                 android:layout_width="match_parent"
@@ -795,6 +801,7 @@
 
         </RelativeLayout>
         <RelativeLayout
+            android:padding="8dp"
             android:id="@+id/rl_shipping_address"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -1001,6 +1008,7 @@
 
 
             <TextView
+                android:background="@color/colorPrimary"
                 android:id="@+id/tv_title_shipping_address_1"
                 style="@style/InputText"
                 android:layout_width="match_parent"
@@ -1011,6 +1019,7 @@
 
         </RelativeLayout>
         <RelativeLayout
+            android:padding="8dp"
             android:id="@+id/rl_billing_address"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -1217,6 +1226,7 @@
             </RelativeLayout>
 
             <TextView
+                android:background="@color/colorPrimary"
                 android:id="@+id/tv_title_billing_address_1"
                 style="@style/InputText"
                 android:layout_width="match_parent"
@@ -1228,6 +1238,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:padding="8dp"
             android:id="@+id/rl_sign_key"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -1272,6 +1283,15 @@
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/back_width"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/back_padding"
+                android:paddingBottom="@dimen/back_padding"
+                android:layout_marginEnd="@dimen/back_padding"
+                android:src="@mipmap/left_arr" />
 
             <TextView
                 android:layout_width="wrap_content"

@@ -265,6 +265,10 @@ public class PaymentActivity extends BaseActivity {
         return bean;
     }
 
+    @OnClick(R.id.iv_back)
+    protected void onBackClick() {
+        onBackPressed();
+    }
 
     @Override
     protected void onResume() {
