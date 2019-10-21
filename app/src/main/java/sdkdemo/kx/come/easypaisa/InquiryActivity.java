@@ -81,6 +81,11 @@ public class InquiryActivity extends BaseActivity {
 
     }
 
+    @OnClick(R.id.iv_back)
+    protected void onBackClick() {
+        onBackPressed();
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
