@@ -6,7 +6,9 @@ import java.util.Map;
 
 import androidx.collection.ArrayMap;
 import sdkdemo.kx.come.easypaylibrary.bean.base.authorization.AuthorizationBean;
+import sdkdemo.kx.come.easypaylibrary.bean.base.genQR.GenQRBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.order.OrderCheckBean;
+import sdkdemo.kx.come.easypaylibrary.bean.base.parseQRBean.ParseQRBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.payment.PaymentBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.query.QueryBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.reback.VoidBean;
@@ -58,7 +60,9 @@ public class ParamsTools {
             params.put("inputCharset", bean.getInputCharset());
             params.put("version", bean.getVersion());
             params.put("signType", String.valueOf(bean.getSignType()));
-            params.put("tradeNature",bean.getTradeNature()  );
+            params.put("tradeNature",bean.getTradeNature());
+            params.put("ext2",bean.getExt2());
+            params.put("extTL",bean.getExtTL());
             params.put("billingAddress",  JSON.toJSONString(bean.getBlAdressBean()));
             params.put("shippingAddress", JSON.toJSONString(bean.getSpAdressBean()) );
             params.put("signMsg", bean.getSignMsg() );
@@ -68,12 +72,18 @@ public class ParamsTools {
             params.put("orderCurrency", bean.getOrderCurrency() );
             params.put("orderAmount", bean.getOrderAmount() );
             params.put("orderDatetime",bean.getOrderDatetime()  );
-            params.put("extTL",bean.getExtTL());
+            params.put("issuerId", bean.getIssuerId() );
             params.put("pickupUrl", bean.getPickupUrl() );
             params.put("receiveUrl", bean.getReceiveUrl() );
             params.put("payerEmail", bean.getPayerEmail() );
             params.put("payerTelephone",bean.getPayerTelephone()  );
-            params.put("IPAddress", bean.getIPAdress() );
+            params.put("IPAddress",bean.getIPAdress() );
+            params.put("firstName", bean.getFirstName());
+            params.put("lastName", bean.getLastName() );
+            params.put("cardNumber", bean.getCardNumber() );
+            params.put("expiryMonth", bean.getExpiryMonth() );
+            params.put("expiryYear", bean.getExpiryYear() );
+            params.put("cardCvv2", bean.getCardCvv2() );
             params.put("crdLvl", String.valueOf(bean.getCrdLvl()));
             params.put("taxAmt", String.valueOf(bean.getTaxAmt()));
             params.put("custCd", String.valueOf(bean.getCustCd()));
@@ -145,6 +155,35 @@ public class ParamsTools {
             params.put("orderNo", bean.getOrderNo() );
             params.put("action", bean.getAction());
             params.put("checkDatetime", bean.getCheckDatetime());
+            params.put("secretKey", bean.getSecretKey() );
+        }
+        return params;
+    }
+
+    public static Map<String,String> genQR(GenQRBean bean) {
+        Map<String, String> params = new ArrayMap<>();
+        if (bean!=null){
+            params.put("version", bean.getVersion());
+            params.put("signType",bean.getSignType());
+            params.put("merchantId",bean.getMerchantId());
+            params.put("orderNo", bean.getOrderNo() );
+            params.put("orderDatetime", bean.getOrderDatetime());
+            params.put("amount", bean.getAmount());
+            params.put("currency", bean.getCurrency());
+            params.put("secretKey", bean.getSecretKey() );
+        }
+        return params;
+    }
+
+    public static Map<String,String> parseQR(ParseQRBean bean) {
+        Map<String, String> params = new ArrayMap<>();
+        if (bean!=null){
+            params.put("version", bean.getVersion());
+            params.put("signType",bean.getSignType());
+            params.put("merchantId",bean.getMerchantId());
+            params.put("terminalId", bean.getTerminalId() );
+            params.put("orderDatetime", bean.getOrderDatetime());
+            params.put("QRcode", bean.getQRcode());
             params.put("secretKey", bean.getSecretKey() );
         }
         return params;

@@ -1,5 +1,6 @@
 package sdkdemo.kx.come.easypaisa;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,8 +14,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
 import sdkdemo.kx.come.easypaylibrary.Checkout;
+import sdkdemo.kx.come.easypaylibrary.activity.WebViewActivity;
 import sdkdemo.kx.come.easypaylibrary.bean.base.order.OrderCheckBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.refund.RefundBean;
+import sdkdemo.kx.come.easypaylibrary.httpService.ApiService;
 import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
 
 public class PreAuthorizationActivity extends BaseActivity {
@@ -64,6 +67,9 @@ public class PreAuthorizationActivity extends BaseActivity {
             @Override
             public void onSuccess(String mResultMessage) {
                 Log.i("zt", "onSuccess:" + mResultMessage);
+                Intent intent = new Intent(PreAuthorizationActivity.this, WebViewActivity.class);
+                intent.putExtra("data", mResultMessage);
+                startActivity(intent);
 
             }
 

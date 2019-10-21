@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 import java.io.IOException;
 import java.util.Map;
@@ -19,12 +20,16 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 import sdkdemo.kx.come.easypaylibrary.activity.PaymentActivity;
+import sdkdemo.kx.come.easypaylibrary.bean.base.authorization.AuthorizationResp;
+import sdkdemo.kx.come.easypaylibrary.bean.base.genQR.GenQRBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.order.OrderCheckBean;
+import sdkdemo.kx.come.easypaylibrary.bean.base.parseQRBean.ParseQRBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.payment.PaymentBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.authorization.AuthorizationBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.query.QueryBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.reback.VoidBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.refund.RefundBean;
+import sdkdemo.kx.come.easypaylibrary.httpService.HttpResponse;
 import sdkdemo.kx.come.easypaylibrary.httpService.RetrofitClient;
 import sdkdemo.kx.come.easypaylibrary.interfaces.Callback;
 import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
@@ -42,6 +47,8 @@ public final class Checkout{
     private static Checkout mCheckout;
 
     public Intent mGoopayIntent;
+
+    private String data1;
 
     private Checkout() {
 
@@ -65,6 +72,7 @@ public final class Checkout{
         if (mGoopayIntent == null) {
             mGoopayIntent = new Intent();
         }
+        mGoopayIntent.putExtra(CheckoutTools.TYPE,"payment");
         mGoopayIntent.putExtra(CheckoutTools.INFO,bean);
         mGoopayIntent.setClass(mActivity, PaymentActivity.class);
         mActivity.startActivity(mGoopayIntent);
@@ -89,12 +97,15 @@ public final class Checkout{
 
                     @Override
                     public void onNext(ResponseBody value) {
-                        Log.i("zt", "onNext:"+value);
+                        Log.i("zt", "onNext:");
+                        String bean= null;
                         try {
-                            mPaymentResult.successPayment(value.string());
+                            bean =  value.string();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                        Log.i("zt", "onNext:"+bean);
+
                     }
 
 
@@ -121,6 +132,7 @@ public final class Checkout{
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
+                    private String data;
                     @Override
                     public void onSubscribe(Disposable d) {
                         Log.i("zt", "onSubscribe:");
@@ -128,12 +140,14 @@ public final class Checkout{
 
                     @Override
                     public void onNext(ResponseBody value) {
-                        Log.i("zt", "onNext:"+value);
                         try {
-                            mPaymentResult.successPayment(value.string());
+                            Log.i("zt", "onNext:"+value.string());
+                            data = value.string();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+
+
                     }
 
 
@@ -145,9 +159,11 @@ public final class Checkout{
                     @Override
                     public void onComplete() {
                         Log.i("zt", "onComplete:");
+                        mPaymentResult.successPayment(data);
 
                     }
                 });
+
     }
 
     public void refundResult(Activity mActivity, RefundBean bean, CheckoutCallback mListener) {
@@ -160,6 +176,7 @@ public final class Checkout{
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
+                    private String data;
                     @Override
                     public void onSubscribe(Disposable d) {
                         Log.i("zt", "onSubscribe:");
@@ -169,7 +186,7 @@ public final class Checkout{
                     public void onNext(ResponseBody value) {
                         Log.i("zt", "onNext:"+value);
                         try {
-                            mPaymentResult.successPayment(value.string());
+                            data = value.string();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -184,7 +201,7 @@ public final class Checkout{
                     @Override
                     public void onComplete() {
                         Log.i("zt", "onComplete:");
-
+                        mPaymentResult.successPayment(data);
                     }
                 });
     }
@@ -200,6 +217,7 @@ public final class Checkout{
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
+                    private String data;
                     @Override
                     public void onSubscribe(Disposable d) {
                         Log.i("zt", "onSubscribe:");
@@ -209,7 +227,7 @@ public final class Checkout{
                     public void onNext(ResponseBody value) {
                         Log.i("zt", "onNext:"+value);
                         try {
-                            mPaymentResult.successPayment(value.string());
+                            data=value.string();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -224,6 +242,7 @@ public final class Checkout{
                     @Override
                     public void onComplete() {
                         Log.i("zt", "onComplete:");
+                        mPaymentResult.successPayment(data);
 
                     }
                 });
@@ -264,6 +283,88 @@ public final class Checkout{
                     @Override
                     public void onComplete() {
                         Log.i("zt", "onComplete:");
+
+                    }
+                });
+    }
+
+    public void genQR(Activity mActivity, GenQRBean bean, CheckoutCallback mListener) {
+        Callback.setCheckoutCallback(mListener);
+        PaymentResult mPaymentResult=new PaymentResult(mActivity);
+        Map<String,String> params=ParamsTools.genQR(bean);
+        RetrofitClient.getInstance(mActivity)
+                .getApiService()
+                .genQR(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.i("zt", "onSubscribe:");
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody value) {
+                        Log.i("zt", "onNext:"+value);
+                        try {
+                            data1 = value.string();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("zt", "onError:" + e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.i("zt", "onComplete:");
+                        mPaymentResult.successPayment(data1);
+
+                    }
+                });
+    }
+    public void parseQR(Activity mActivity, ParseQRBean bean, CheckoutCallback mListener) {
+        Callback.setCheckoutCallback(mListener);
+        PaymentResult mPaymentResult=new PaymentResult(mActivity);
+        Map<String,String> params=ParamsTools.parseQR(bean);
+        RetrofitClient.getInstance(mActivity)
+                .getApiService()
+                .parseQR(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+
+                    private String data;
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.i("zt", "onSubscribe:");
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody value) {
+                        Log.i("zt", "onNext:"+value);
+                        try {
+                            data = value.string();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("zt", "onError:" + e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.i("zt", "onComplete:");
+                        mPaymentResult.successPayment(data);
 
                     }
                 });

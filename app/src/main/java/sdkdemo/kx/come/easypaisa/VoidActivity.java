@@ -1,5 +1,6 @@
 package sdkdemo.kx.come.easypaisa;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
@@ -10,8 +11,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import sdkdemo.kx.come.easypaylibrary.Checkout;
+import sdkdemo.kx.come.easypaylibrary.activity.WebViewActivity;
 import sdkdemo.kx.come.easypaylibrary.bean.base.query.QueryBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.reback.VoidBean;
+import sdkdemo.kx.come.easypaylibrary.httpService.ApiService;
 import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
 
 public class VoidActivity extends BaseActivity {
@@ -55,7 +58,9 @@ public class VoidActivity extends BaseActivity {
             @Override
             public void onSuccess(String mResultMessage) {
                 Log.i("zt", "onSuccess:" + mResultMessage);
-
+                Intent intent = new Intent(VoidActivity.this, WebViewActivity.class);
+                intent.putExtra("data", mResultMessage);
+                startActivity(intent);
             }
 
             @Override

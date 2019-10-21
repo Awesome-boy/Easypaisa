@@ -42,5 +42,15 @@ public interface ApiService {
     @POST("tests/order_check_result.jsp")
     Observable<ResponseBody> orderCheck(@FieldMap Map<String, String> map);
 
+    //genQR
+    @FormUrlEncoded
+    @POST("tests/genQR_result.jsp")
+    Observable<ResponseBody> genQR(@FieldMap Map<String, String> map);
+
+    //genQR
+    @FormUrlEncoded
+    @POST("tests/parseQR_result.jsp")
+    Observable<ResponseBody> parseQR(@FieldMap Map<String, String> map);
+
 }
 

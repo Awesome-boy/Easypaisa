@@ -15,10 +15,7 @@ public class CheckoutTools {
 
 
     public final static String INFO = "CheckoutInfo";
+    public final static String DATA = "Data";
+    public final static String TYPE = "type";
 
-    public final static String FORMAL_ENVIRONMENT = "Formal_Environment";
-    public final static String SANDBOX_ENVIRONMENT = "Sandbox_Environment";
-
-
-    public final static int INTERNATIONAL_CARD_TYPE = 117;
 }

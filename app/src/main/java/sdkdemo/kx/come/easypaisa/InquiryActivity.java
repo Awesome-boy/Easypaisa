@@ -14,6 +14,7 @@ import sdkdemo.kx.come.easypaylibrary.Checkout;
 import sdkdemo.kx.come.easypaylibrary.activity.WebViewActivity;
 import sdkdemo.kx.come.easypaylibrary.bean.base.authorization.AuthorizationBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.query.QueryBean;
+import sdkdemo.kx.come.easypaylibrary.httpService.ApiService;
 import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
 
 public class InquiryActivity extends BaseActivity {
@@ -54,6 +55,10 @@ public class InquiryActivity extends BaseActivity {
             @Override
             public void onSuccess(String mResultMessage) {
                 Log.i("zt", "onSuccess:" + mResultMessage);
+                Intent intent = new Intent(InquiryActivity.this, WebViewActivity.class);
+                intent.putExtra("data", mResultMessage);
+                intent.putExtra("url",ApiService.BASE_URL+"tests/query_result.jsp");
+                startActivity(intent);
 
             }
 

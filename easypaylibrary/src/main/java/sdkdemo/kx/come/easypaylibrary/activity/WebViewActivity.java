@@ -15,12 +15,15 @@ import android.webkit.WebViewClient;
 
 import androidx.appcompat.app.AppCompatActivity;
 import sdkdemo.kx.come.easypaylibrary.R;
+import sdkdemo.kx.come.easypaylibrary.httpService.ApiService;
+import sdkdemo.kx.come.easypaylibrary.tools.CheckoutTools;
 
 public class WebViewActivity extends AppCompatActivity {
 
     private WebView webView;
     private ProgressDialog progressdialog;
     private String data;
+    private String baseUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +39,7 @@ public class WebViewActivity extends AppCompatActivity {
     }
     @SuppressLint("SetJavaScriptEnabled")
     protected void initData() {
-        data = getIntent().getStringExtra("data");
-        Log.d("zt","zt--"+data);
+        data = getIntent().getStringExtra(CheckoutTools.DATA);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setPluginState(WebSettings.PluginState.ON);
         webView.setWebChromeClient(new WebChromeClient());
@@ -64,7 +66,6 @@ public class WebViewActivity extends AppCompatActivity {
 
             }
         });
-
         webView.loadDataWithBaseURL("http://sd.coshine.com/gateway/gateway/",  data, "text/html", "UTF-8", null);
 
     }

@@ -7,6 +7,9 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.nio.charset.Charset;
 import java.security.cert.CertificateException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -17,6 +20,9 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -29,7 +35,7 @@ import sdkdemo.kx.come.easypaylibrary.tools.SecurityUtil;
 public class RetrofitClient {
     private static RetrofitClient instance;
     private ApiService apiService;
-
+    private final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
     public static RetrofitClient getInstance(Context context) {
         if (instance == null) {
             instance = new RetrofitClient(context);
@@ -69,6 +75,18 @@ public class RetrofitClient {
                             .build());
                 })
 //                 .sslSocketFactory(getSSLSocketFactory())
+                .cookieJar(new CookieJar() {
+                    @Override
+                    public void saveFromResponse(HttpUrl httpUrl, List<Cookie> list) {
+                        cookieStore.put(httpUrl.host(), list);
+                    }
+
+                    @Override
+                    public List<Cookie> loadForRequest(HttpUrl httpUrl) {
+                        List<Cookie> cookies = cookieStore.get(httpUrl.host());
+                        return cookies != null ? cookies : new ArrayList<Cookie>();
+                    }
+                })
                 .retryOnConnectionFailure(true)
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .hostnameVerifier((hostname, session) -> true);

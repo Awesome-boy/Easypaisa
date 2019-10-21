@@ -1,6 +1,8 @@
 package sdkdemo.kx.come.easypaisa;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -11,6 +13,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
+import sdkdemo.kx.come.easypaylibrary.Checkout;
+import sdkdemo.kx.come.easypaylibrary.activity.WebViewActivity;
+import sdkdemo.kx.come.easypaylibrary.bean.base.genQR.GenQRBean;
+import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
 
 public class GenerateQRActivity extends BaseActivity {
 
@@ -43,6 +49,45 @@ public class GenerateQRActivity extends BaseActivity {
 
     @OnClick(R.id.btn_confirm)
     protected void onClick() {
+        sendRequest();
+
+    }
+
+    private void sendRequest() {
+        GenQRBean bean=setBean();
+        Checkout.getInstance().genQR(GenerateQRActivity.this, bean, new CheckoutCallback() {
+            @Override
+            public void onCancel(String mResultMessage) {
+                Log.i("zt", "onCancel:" + mResultMessage);
+            }
+
+            @Override
+            public void onSuccess(String mResultMessage) {
+                Log.i("zt", "onSuccess:" + mResultMessage);
+                Intent intent = new Intent(GenerateQRActivity.this, WebViewActivity.class);
+                intent.putExtra("data", mResultMessage);
+                startActivity(intent);
+
+            }
+
+            @Override
+            public void onError(String mResultMessage) {
+                Log.i("zt", "onError:" + mResultMessage);
+            }
+        });
+    }
+
+    private GenQRBean setBean() {
+        GenQRBean bean=new GenQRBean();
+        bean.setSignType("0");
+        bean.setVersion("v1.0");
+        bean.setMerchantId("010704515311001");
+        bean.setOrderDatetime("20191021095212");
+        bean.setOrderNo("20191019191954");
+        bean.setCurrency("840");
+        bean.setAmount("998");
+        bean.setSecretKey("ZloDcaGkb1zP9%2FL7LkgWDA%3D%3D");
+        return bean;
 
     }
 

@@ -12,13 +12,10 @@ public class AuthorizationBean implements Serializable {
     private String version;
     private int signType;
     private String tradeNature;
-
+    private String ext2;
+    private String extTL;
     private BlAdressBean blAdressBean;
-
     private SpAdressBean spAdressBean;
-
-
-
     private String signMsg;
     private int payType;
     private String merchantId;
@@ -26,13 +23,18 @@ public class AuthorizationBean implements Serializable {
     private String orderAmount;
     private String orderCurrency;
     private String orderDatetime;
-    private String extTL;
+    private String issuerId;
     private String pickupUrl;
     private String receiveUrl;
     private String payerEmail;
     private String payerTelephone;
     private String IPAdress;
-    private String secretKey;
+    private String firstName;
+    private String lastName;
+    private String cardNumber;
+    private String expiryMonth;
+    private String expiryYear;
+    private String cardCvv2;
     private int crdLvl;
     private int taxAmt;
     private int custCd;
@@ -45,6 +47,7 @@ public class AuthorizationBean implements Serializable {
     private int invoiceNum;
     private int freightAmt;
     private int dutyAmt;
+    private String secretKey;
 
     public BlAdressBean getBlAdressBean() {
         return blAdressBean;
@@ -304,41 +307,70 @@ public class AuthorizationBean implements Serializable {
         this.extTL = extTL;
     }
 
-    @Override
-    public String toString() {
-        return "AuthorizationBean{" +
-                "inputCharset='" + inputCharset + '\'' +
-                ", version='" + version + '\'' +
-                ", signType=" + signType +
-                ", tradeNature='" + tradeNature + '\'' +
-                ", blAdressBean=" + blAdressBean +
-                ", spAdressBean=" + spAdressBean +
-                ", signMsg='" + signMsg + '\'' +
-                ", payType=" + payType +
-                ", merchantId='" + merchantId + '\'' +
-                ", orderNo='" + orderNo + '\'' +
-                ", orderAmount='" + orderAmount + '\'' +
-                ", orderCurrency='" + orderCurrency + '\'' +
-                ", orderDatetime='" + orderDatetime + '\'' +
-                ", extTL='" + extTL + '\'' +
-                ", pickupUrl='" + pickupUrl + '\'' +
-                ", receiveUrl='" + receiveUrl + '\'' +
-                ", payerEmail='" + payerEmail + '\'' +
-                ", payerTelephone='" + payerTelephone + '\'' +
-                ", IPAdress='" + IPAdress + '\'' +
-                ", secretKey='" + secretKey + '\'' +
-                ", crdLvl=" + crdLvl +
-                ", taxAmt=" + taxAmt +
-                ", custCd=" + custCd +
-                ", mchPostCd=" + mchPostCd +
-                ", taxId=" + taxId +
-                ", mchMinorityCd=" + mchMinorityCd +
-                ", mchStateCd=" + mchStateCd +
-                ", shipPostCd=" + shipPostCd +
-                ", destPostCd=" + destPostCd +
-                ", invoiceNum=" + invoiceNum +
-                ", freightAmt=" + freightAmt +
-                ", dutyAmt=" + dutyAmt +
-                '}';
+    public String getExt2() {
+        return ext2;
     }
+
+    public void setExt2(String ext2) {
+        this.ext2 = ext2;
+    }
+
+    public String getIssuerId() {
+        return issuerId;
+    }
+
+    public void setIssuerId(String issuerId) {
+        this.issuerId = issuerId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public String getExpiryMonth() {
+        return expiryMonth;
+    }
+
+    public void setExpiryMonth(String expiryMonth) {
+        this.expiryMonth = expiryMonth;
+    }
+
+    public String getExpiryYear() {
+        return expiryYear;
+    }
+
+    public void setExpiryYear(String expiryYear) {
+        this.expiryYear = expiryYear;
+    }
+
+    public String getCardCvv2() {
+        return cardCvv2;
+    }
+
+    public void setCardCvv2(String cardCvv2) {
+        this.cardCvv2 = cardCvv2;
+    }
+
+
+
 }
