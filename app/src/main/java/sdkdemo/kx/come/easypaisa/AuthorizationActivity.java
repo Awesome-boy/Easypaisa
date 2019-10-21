@@ -203,9 +203,9 @@ public class AuthorizationActivity extends BaseActivity {
             @Override
             public void onSuccess(String mResultMessage) {
                 Log.i("zt", "onSuccess:" + mResultMessage);
-                Intent intent = new Intent(AuthorizationActivity.this, WebViewActivity.class);
-                intent.putExtra("data", mResultMessage);
-                startActivity(intent);
+//                Intent intent = new Intent(AuthorizationActivity.this, WebViewActivity.class);
+//                intent.putExtra("data", mResultMessage);
+//                startActivity(intent);
 
             }
 
@@ -260,6 +260,13 @@ public class AuthorizationActivity extends BaseActivity {
         bean.setPayerEmail(parseViewText(mETTxt7));
         bean.setPayerTelephone(parseViewText(mETTxt8));
         bean.setIPAdress(parseViewText(mETTxt9));
+        bean.setIssuerId("M");
+        bean.setLastName("Test");
+        bean.setFirstName("Test");
+        bean.setCardNumber("5264711000319246");
+        bean.setExpiryMonth("11");
+        bean.setExpiryYear("21");
+        bean.setCardCvv2("789");
 
         // TODO: 2019-10-21 miss the exttl
 

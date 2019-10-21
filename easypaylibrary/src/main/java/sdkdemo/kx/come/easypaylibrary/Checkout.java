@@ -90,6 +90,7 @@ public final class Checkout{
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
+                    private String data;
                     @Override
                     public void onSubscribe(Disposable d) {
                         Log.i("zt", "onSubscribe:");
@@ -97,14 +98,12 @@ public final class Checkout{
 
                     @Override
                     public void onNext(ResponseBody value) {
-                        Log.i("zt", "onNext:");
-                        String bean= null;
                         try {
-                            bean =  value.string();
+                            data = value.string();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        Log.i("zt", "onNext:"+bean);
+
 
                     }
 
@@ -116,10 +115,12 @@ public final class Checkout{
 
                     @Override
                     public void onComplete() {
-                        Log.i("zt", "onComplete:");
+                        Log.i("zt", "onComplete:"+data);
+                        mPaymentResult.successPayment(data);
 
                     }
                 });
+
     }
 
     public void queryResult(Activity mActivity, QueryBean bean, CheckoutCallback mListener) {
@@ -141,7 +142,6 @@ public final class Checkout{
                     @Override
                     public void onNext(ResponseBody value) {
                         try {
-                            Log.i("zt", "onNext:"+value.string());
                             data = value.string();
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -158,7 +158,7 @@ public final class Checkout{
 
                     @Override
                     public void onComplete() {
-                        Log.i("zt", "onComplete:");
+                        Log.i("zt", "onComplete:"+data);
                         mPaymentResult.successPayment(data);
 
                     }

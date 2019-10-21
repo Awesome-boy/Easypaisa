@@ -73,6 +73,9 @@ public class ParseQRActivity extends BaseActivity {
         bean.setMerchantId(parseViewText(mETTxtParseQR1));
         bean.setOrderDatetime(parseViewText(mETTxtParseQR5));
         bean.setTerminalId(parseViewText(mETTxtParseQR2));
+
+        //00020101021204150107045153110015204531153038405405998.05802NG5919Circle+Trade+Co+Ltd6012Lagos+Island61064200006237011420191021095154061501070451531100164450002ZH0119Circle+Trade+Co+Ltd0212Lagos+Island6304B441
+//        bean.setQRcode(parseViewText(mETTxtParseQR3));
         bean.setQRcode("00020101021204150107045153110015204531153038405405998.05802NG5919Circle+Trade+Co+Ltd6012Lagos+Island61064200006237011420191021095154061501070451531100164450002ZH0119Circle+Trade+Co+Ltd0212Lagos+Island6304B441");
         bean.setSecretKey(parseViewText(mETSignKey));
         return bean;

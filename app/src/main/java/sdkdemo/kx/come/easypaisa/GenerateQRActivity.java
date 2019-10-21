@@ -85,7 +85,10 @@ public class GenerateQRActivity extends BaseActivity {
         bean.setOrderNo(parseViewText(mETTxtGenQR2));
         bean.setCurrency(mCurrency);
         bean.setAmount(parseViewText(mETTxtGenQR5));
-        bean.setSecretKey(parseViewText(mETSignKey));
+
+//        bean.setSecretKey(parseViewText(mETSignKey));
+
+        bean.setSecretKey("ZloDcaGkb1zP9%2FL7LkgWDA%3D%3D");
         return bean;
 
     }
