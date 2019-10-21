@@ -1,7 +1,11 @@
 package sdkdemo.kx.come.easypaylibrary.tools;
 
+import android.util.Log;
+
 import com.alibaba.fastjson.JSON;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
 import java.util.Map;
 
 import androidx.collection.ArrayMap;
@@ -62,7 +66,21 @@ public class ParamsTools {
             params.put("signType", String.valueOf(bean.getSignType()));
             params.put("tradeNature",bean.getTradeNature());
             params.put("ext2",bean.getExt2());
-            params.put("extTL",bean.getExtTL());
+
+            String tdesKey=bean.getSecretKey().substring(0,16);
+            tdesKey+=tdesKey.substring(0,8);
+
+            Log.d("3destdesKey",tdesKey);
+            Log.d("3destdesKey",JSON.toJSONString(bean.getExtTLbean()));
+            try {
+
+                String jiami= TripleDES.encrypt3DES(JSON.toJSONBytes(bean.getExtTLbean()),tdesKey.getBytes());
+                Log.d("3des",jiami);
+                params.put("extTL",jiami);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             params.put("billingAddress",  JSON.toJSONString(bean.getBlAdressBean()));
             params.put("shippingAddress", JSON.toJSONString(bean.getSpAdressBean()) );
             params.put("signMsg", bean.getSignMsg() );

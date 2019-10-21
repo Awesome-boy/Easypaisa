@@ -13,7 +13,7 @@ public class AuthorizationBean implements Serializable {
     private int signType;
     private String tradeNature;
     private String ext2;
-    private String extTL;
+    private extTL extTLbean;
     private BlAdressBean blAdressBean;
     private SpAdressBean spAdressBean;
     private String signMsg;
@@ -299,12 +299,12 @@ public class AuthorizationBean implements Serializable {
         this.dutyAmt = dutyAmt;
     }
 
-    public String getExtTL() {
-        return extTL;
+    public extTL getExtTLbean() {
+        return extTLbean;
     }
 
-    public void setExtTL(String extTL) {
-        this.extTL = extTL;
+    public void setExtTLbean(extTL extTLbean) {
+        this.extTLbean = extTLbean;
     }
 
     public String getExt2() {

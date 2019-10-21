@@ -1,6 +1,5 @@
 package sdkdemo.kx.come.easypaisa;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,10 +13,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
 import sdkdemo.kx.come.easypaylibrary.Checkout;
-import sdkdemo.kx.come.easypaylibrary.activity.WebViewActivity;
 import sdkdemo.kx.come.easypaylibrary.bean.base.BlAdressBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.SpAdressBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.authorization.AuthorizationBean;
+import sdkdemo.kx.come.easypaylibrary.bean.base.authorization.extTL;
 import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
 
 public class AuthorizationActivity extends BaseActivity {
@@ -90,6 +89,8 @@ public class AuthorizationActivity extends BaseActivity {
     EditText mETTxtExt11;
     @BindView(R.id.et_txt_ext_12)
     EditText mETTxtExt12;
+//    @BindView(R.id.et_sign_msg)
+//    EditText mSignMsg;
 
     // shipping address
     @BindView(R.id.et_shipping_address_1)
@@ -247,11 +248,20 @@ public class AuthorizationActivity extends BaseActivity {
         spAdressBean.setCountry(parseViewText(mETTxtShippingAddress6));
         bean.setSpAdressBean(spAdressBean);
 
-        bean.setSignMsg("8f0e5fd0b3797194f27f0f547dcf9e0c");
+        bean.setSignMsg("acbc9065db92add6be219d62208dffe5");
         bean.setPayType(Integer.valueOf(mPayType));
         bean.setMerchantId(parseViewText(mMerNo));
         bean.setOrderNo(parseViewText(mOrderNo));
-        bean.setExtTL("C64EjY5ZgJ%2FB3dkulfeae%2Bxe1h%2FQdzzDGqzK0HMqDd0pTErt28tsBUjOawMBNEtrLVvby2jewwimnQy2LxMBX3dpGbHdX6cj45j9deQhDZrm6ZZ4Muq8%2BVQhQQLkvWZbNCNuIgeoHWP2fC6S4tdcxbiu5m18hHNTtyzlpnfGp%2F0%3D");
+        bean.setExt2("");
+        extTL extTLbean=new extTL();
+        extTLbean.setLastName(parseViewText(mETTextExttl1));
+        extTLbean.setFirstName(parseViewText(mETTextExttl2));
+        extTLbean.setCardNumber(parseViewText(mETTextExttl3));
+        extTLbean.setExpiryMonth(parseViewText(mETTextExttl5));
+        extTLbean.setExpiryYear(parseViewText(mETTextExttl51));
+        extTLbean.setCardCvv2(parseViewText(mETTextExttl4));
+        bean.setExtTLbean(extTLbean);
+//        bean.setExtTLbean("C64EjY5ZgJ%2FB3dkulfeae%2Bxe1h%2FQdzzDGqzK0HMqDd0pTErt28tsBUjOawMBNEtrLVvby2jewwimnQy2LxMBX3dpGbHdX6cj45j9deQhDZrm6ZZ4Muq8%2BVQhQQLkvWZbNCNuIgeoHWP2fC6S4tdcxbiu5m18hHNTtyzlpnfGp%2F0%3D&1&M&010704515311001&0.11&840&20191018174733&20191018174733&13&paygwy@test.com&13888888888&http://sd.coshine.com:80/gateway/tests/payment_result.jsp&http://sd.coshine.com:80/gateway/tests/payment_callback.jsp&0&GOODS&v1.0&ZloDcaGkb1zP9/L7LkgWDA==");
         bean.setOrderCurrency(mCurrency);
         bean.setOrderDatetime(parseViewText(mETTxt4));
         bean.setOrderAmount(parseViewText(mETTxt3));
@@ -261,13 +271,12 @@ public class AuthorizationActivity extends BaseActivity {
         bean.setPayerTelephone(parseViewText(mETTxt8));
         bean.setIPAdress(parseViewText(mETTxt9));
         bean.setIssuerId("M");
-        bean.setLastName("Test");
-        bean.setFirstName("Test");
-        bean.setCardNumber("5264711000319246");
-        bean.setExpiryMonth("11");
-        bean.setExpiryYear("21");
-        bean.setCardCvv2("789");
-
+        bean.setLastName(parseViewText(mETTextExttl1));
+        bean.setFirstName(parseViewText(mETTextExttl2));
+        bean.setCardNumber(parseViewText(mETTextExttl3));
+        bean.setExpiryMonth(parseViewText(mETTextExttl5));
+        bean.setExpiryYear(parseViewText(mETTextExttl51));
+        bean.setCardCvv2(parseViewText(mETTextExttl4));
         // TODO: 2019-10-21 miss the exttl
 
 
