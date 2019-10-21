@@ -39,7 +39,6 @@ public class GenerateQRActivity extends BaseActivity {
     EditText mETTxtGenQR6;
 
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +53,7 @@ public class GenerateQRActivity extends BaseActivity {
     }
 
     private void sendRequest() {
-        GenQRBean bean=setBean();
+        GenQRBean bean = setBean();
         Checkout.getInstance().genQR(GenerateQRActivity.this, bean, new CheckoutCallback() {
             @Override
             public void onCancel(String mResultMessage) {
@@ -78,15 +77,15 @@ public class GenerateQRActivity extends BaseActivity {
     }
 
     private GenQRBean setBean() {
-        GenQRBean bean=new GenQRBean();
+        GenQRBean bean = new GenQRBean();
         bean.setSignType("0");
         bean.setVersion("v1.0");
-        bean.setMerchantId("010704515311001");
-        bean.setOrderDatetime("20191021095212");
-        bean.setOrderNo("20191019191954");
-        bean.setCurrency("840");
-        bean.setAmount("998");
-        bean.setSecretKey("ZloDcaGkb1zP9%2FL7LkgWDA%3D%3D");
+        bean.setMerchantId(parseViewText(mETTxtGenQR1));
+        bean.setOrderDatetime(parseViewText(mETTxtGenQR6));
+        bean.setOrderNo(parseViewText(mETTxtGenQR2));
+        bean.setCurrency(mCurrency);
+        bean.setAmount(parseViewText(mETTxtGenQR5));
+        bean.setSecretKey(parseViewText(mETSignKey));
         return bean;
 
     }
