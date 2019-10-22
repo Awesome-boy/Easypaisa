@@ -76,6 +76,7 @@ public class VoidActivity extends BaseActivity {
         bean.setMerchantId(parseViewText(mETTxtVoid1));
         bean.setOrderDatetime(parseViewText(mETTxtVoid3));
         bean.setOriginalOrderNo(parseViewText(mETTxtVoid5));
+        
         bean.setSecretKey(parseViewText(mETSignKey));
         return bean;
     }

@@ -33,7 +33,7 @@ public interface ApiService {
 
     //退回
     @FormUrlEncoded
-    @POST("tests/void.jsp")
+    @POST("tests/void_result.jsp")
     Observable<ResponseBody> reback(@FieldMap Map<String, String> map);
 
 
