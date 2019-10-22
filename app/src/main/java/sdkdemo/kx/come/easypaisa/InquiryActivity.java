@@ -12,9 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import sdkdemo.kx.come.easypaylibrary.Checkout;
 import sdkdemo.kx.come.easypaylibrary.activity.WebViewActivity;
-import sdkdemo.kx.come.easypaylibrary.bean.base.authorization.AuthorizationBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.query.QueryBean;
-import sdkdemo.kx.come.easypaylibrary.httpService.ApiService;
 import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
 
 public class InquiryActivity extends BaseActivity {
