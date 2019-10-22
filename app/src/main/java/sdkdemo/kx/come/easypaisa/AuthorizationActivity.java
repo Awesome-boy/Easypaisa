@@ -6,6 +6,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.alibaba.fastjson.JSON;
+
+import org.json.JSONObject;
+
 import androidx.annotation.Nullable;
 
 import butterknife.BindView;
@@ -16,6 +20,7 @@ import sdkdemo.kx.come.easypaylibrary.Checkout;
 import sdkdemo.kx.come.easypaylibrary.bean.base.BlAdressBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.SpAdressBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.authorization.AuthorizationBean;
+import sdkdemo.kx.come.easypaylibrary.bean.base.authorization.AuthorizationResp;
 import sdkdemo.kx.come.easypaylibrary.bean.base.authorization.extTL;
 import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
 
@@ -204,10 +209,8 @@ public class AuthorizationActivity extends BaseActivity {
             @Override
             public void onSuccess(String mResultMessage) {
                 Log.i("zt", "onSuccess:" + mResultMessage);
-//                Intent intent = new Intent(AuthorizationActivity.this, WebViewActivity.class);
-//                intent.putExtra("data", mResultMessage);
-//                startActivity(intent);
-
+                AuthorizationResp bean= com.alibaba.fastjson.JSONObject.parseObject(mResultMessage,AuthorizationResp.class);
+                Log.d("zt",bean.getIssuerId());
             }
 
             @Override
@@ -254,8 +257,8 @@ public class AuthorizationActivity extends BaseActivity {
         bean.setOrderNo(parseViewText(mOrderNo));
         bean.setExt2("");
         extTL extTLbean=new extTL();
-        extTLbean.setLastName(parseViewText(mETTextExttl1));
         extTLbean.setFirstName(parseViewText(mETTextExttl2));
+        extTLbean.setLastName(parseViewText(mETTextExttl1));
         extTLbean.setCardNumber(parseViewText(mETTextExttl3));
         extTLbean.setExpiryMonth(parseViewText(mETTextExttl5));
         extTLbean.setExpiryYear(parseViewText(mETTextExttl51));

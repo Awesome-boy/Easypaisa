@@ -39,9 +39,7 @@ public final class PaymentActivity extends Activity {
     private PaymentResult mPaymentResult;
     private boolean popupwindowDisplayKey = true;
 
-    private Map<String,String> params;
-    private String type;
-    private String data;
+    private Map<String, String> params;
 
 
     @Override
@@ -55,17 +53,12 @@ public final class PaymentActivity extends Activity {
     }
 
     private void init() {
-
-
-                    PaymentBean paymentBean = (PaymentBean) getIntent().getSerializableExtra(CheckoutTools.INFO);
-                    params = ParamsTools.setParams(paymentBean);
-
-
-            mPaymentResult = new PaymentResult(PaymentActivity.this);
-            initListener();
+        PaymentBean paymentBean = (PaymentBean) getIntent().getSerializableExtra(CheckoutTools.INFO);
+        params = ParamsTools.setParams(paymentBean);
+        mPaymentResult = new PaymentResult(PaymentActivity.this);
+        initListener();
 
     }
-
 
 
     @Override
@@ -82,14 +75,12 @@ public final class PaymentActivity extends Activity {
                     public void onGlobalLayout() {
                         if (popupwindowDisplayKey) {
                             popupwindowDisplayKey = false;
-
                             sendPaymentQuest();
 
                         }
                     }
                 });
     }
-
 
 
     private void sendPaymentQuest() {
@@ -100,6 +91,7 @@ public final class PaymentActivity extends Activity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
                     private String data;
+
                     @Override
                     public void onSubscribe(Disposable d) {
 
@@ -108,9 +100,9 @@ public final class PaymentActivity extends Activity {
 
                     @Override
                     public void onNext(ResponseBody value) {
-                        Log.i("zt", "onNext:"+value);
+                        Log.i("zt", "onNext:" + value);
                         try {
-                            data=value.string();
+                            data = value.string();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
