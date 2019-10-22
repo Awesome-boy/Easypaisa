@@ -89,12 +89,37 @@
 -keep public class * extends android.preference.Preference
 -dontwarn org.apache.http.**
 
--keep class com.ronhan.pacypay.exception.**{*;}
--keep class com.ronhan.pacypay.interfaces.*{*;}
--keep class com.ronhan.pacypay.bean.*
--keep class com.ronhan.pacypay.Checkout{
+-keepclassmembers,allowshrinking,allowobfuscation interface * {
+    @retrofit2.http.* <methods>;
+}
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+-dontwarn javax.annotation.**
+-dontwarn kotlin.Unit
+-dontwarn retrofit2.-KotlinExtensions
+-dontwarn okhttp3.**
+-keep class okhttp3.** { *;}
+
+-keep class com.alibaba.fastjson.JSON{
     public *;
 }
--keep class com.ronhan.pacypay.component.ui.*{*;}
+
+-keep class **.easypaylibrary.exception.**{*;}
+-keep class **.easypaylibrary.interfaces.**{*;}
+-keep class **.easypaylibrary.bean.base.**
+
+-keep class **.easypaylibrary.tools.ParamsTools{
+    public *;
+}
+-keep class **.easypaylibrary.Checkout{
+    public *;
+}
+-keep class **.easypaylibrary.layout.**{*;}
+
+#butknife
+-keep class butterknife.** { *; }
+-dontwarn butterknife.internal.**
+-keep class **$$ViewBinder { *; }
+-keepclasseswithmembernames class * {    @butterknife.* <fields>;}
+-keepclasseswithmembernames class * {    @butterknife.* <methods>;}
 
 -ignorewarnings
