@@ -84,6 +84,7 @@ public final class Checkout{
         Callback.setCheckoutCallback(mListener);
         PaymentResult mPaymentResult=new PaymentResult(mActivity);
         Map<String,String> params=ParamsTools.authorizationParams(bean);
+
         RetrofitClient.getInstance(mActivity)
                 .getApiService()
                 .setAuthorization(params)

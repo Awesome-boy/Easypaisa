@@ -1,10 +1,15 @@
 package sdkdemo.kx.come.easypaylibrary.tools;
 
+import android.net.Uri;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Base64;
 import java.util.Map;
 
@@ -58,7 +63,7 @@ public class ParamsTools {
         return params;
     }
 
-    public static Map<String,String> authorizationParams(AuthorizationBean bean) {
+    public static Map<String,String> authorizationParams(AuthorizationBean bean)  {
         Map<String, String> params = new ArrayMap<>();
         if (bean!=null){
             params.put("inputCharset", bean.getInputCharset());
@@ -72,15 +77,28 @@ public class ParamsTools {
 
             Log.d("3destdesKey",tdesKey);
             Log.d("3destdesKey",JSON.toJSONString(bean.getExtTLbean()));
+            JSONObject jsonObject=new JSONObject();
             try {
-
-                String jiami= TripleDES.encrypt3DES(JSON.toJSONBytes(bean.getExtTLbean()),tdesKey.getBytes());
-                Log.d("3des",jiami);
-                params.put("extTL",jiami);
-            } catch (Exception e) {
+                jsonObject.put("firstName",bean.getExtTLbean().getFirstName());
+                jsonObject.put("lastName",bean.getExtTLbean().getLastName());
+                jsonObject.put("cardNumber",bean.getExtTLbean().getCardNumber());
+                jsonObject.put("expiryMonth",bean.getExtTLbean().getExpiryMonth());
+                jsonObject.put("expiryYear",bean.getExtTLbean().getExpiryYear());
+                jsonObject.put("cardCvv2",bean.getExtTLbean().getCardCvv2());
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
 
+            Log.d("3des1",jsonObject.toString());
+            try {
+
+                String desData= TripleDES.encrypt3DES(jsonObject.toString().getBytes(),tdesKey.getBytes());
+//                String Str=desData.replace("\n", "");
+                params.put("extTL",desData);
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
             params.put("billingAddress",  JSON.toJSONString(bean.getBlAdressBean()));
             params.put("shippingAddress", JSON.toJSONString(bean.getSpAdressBean()) );
             params.put("signMsg", bean.getSignMsg() );

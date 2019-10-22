@@ -32,7 +32,7 @@ public class TripleDES {
 		// 恢复密钥
 		SecretKey secretKey = new SecretKeySpec(key, ENCRYPTION_MANNER);
 		// Cipher完成加密
-		Cipher cipher = Cipher.getInstance(ENCRYPTION_MANNER);
+		Cipher cipher = Cipher.getInstance(ALGORITHM);
 		// cipher初始化
 		cipher.init(Cipher.ENCRYPT_MODE, secretKey);
 		byte[] encrypt = cipher.doFinal(data);

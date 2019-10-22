@@ -1,6 +1,7 @@
 package sdkdemo.kx.come.easypaylibrary.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -12,6 +13,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import sdkdemo.kx.come.easypaylibrary.R;
@@ -21,9 +23,8 @@ import sdkdemo.kx.come.easypaylibrary.tools.CheckoutTools;
 public class WebViewActivity extends AppCompatActivity {
 
     private WebView webView;
-    private ProgressDialog progressdialog;
     private String data;
-    private String baseUrl;
+    private Dialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,24 +67,28 @@ public class WebViewActivity extends AppCompatActivity {
 
             }
         });
-        webView.loadDataWithBaseURL("http://sd.coshine.com/gateway/gateway/",  data, "text/html", "UTF-8", null);
+        webView.loadDataWithBaseURL(ApiService.BASE_URL,  data, "text/html", "UTF-8", null);
 
     }
 
     private void hideProgress() {
-        if (progressdialog!=null&&progressdialog.isShowing() && !isFinishing()){
-            progressdialog.dismiss();
+        if (progressDialog!=null&&progressDialog.isShowing() && !isFinishing()){
+            progressDialog.dismiss();
         }
 
     }
 
     private void showProgress(String s) {
-        if (progressdialog==null){
-            progressdialog = new ProgressDialog(this);
+        if (progressDialog!=null&& progressDialog.isShowing()){
+            return;
         }
-        progressdialog.setMessage(s);
-        progressdialog.setCancelable(false);
-        progressdialog.show();
+        progressDialog = new Dialog(WebViewActivity.this,R.style.progress_dialog);
+        progressDialog.setContentView(R.layout.dialog);
+        progressDialog.setCancelable(false);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        TextView msg = progressDialog.findViewById(R.id.id_tv_loadingmsg);
+        msg.setText(s);
+        progressDialog.show();
     }
 
     @Override

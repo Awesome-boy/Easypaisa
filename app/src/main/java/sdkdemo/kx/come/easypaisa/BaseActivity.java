@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 
 public abstract class BaseActivity extends Activity {
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,5 +32,7 @@ public abstract class BaseActivity extends Activity {
             return 0;
         }
     }
+
+
 
 }
