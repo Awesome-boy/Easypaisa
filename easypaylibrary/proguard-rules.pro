@@ -107,6 +107,9 @@
 -keep class **.easypaylibrary.interfaces.**{*;}
 -keep class **.easypaylibrary.bean.base.**
 
+-keep class **.easypaylibrary.tools.MD5{
+    public *;
+}
 -keep class **.easypaylibrary.tools.ParamsTools{
     public *;
 }
