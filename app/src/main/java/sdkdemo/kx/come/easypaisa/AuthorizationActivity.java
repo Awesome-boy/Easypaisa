@@ -5,10 +5,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 
 import org.json.JSONObject;
+
+import java.util.List;
 
 import androidx.annotation.Nullable;
 
@@ -18,6 +21,7 @@ import butterknife.OnClick;
 import butterknife.OnItemSelected;
 import sdkdemo.kx.come.easypaylibrary.Checkout;
 import sdkdemo.kx.come.easypaylibrary.bean.base.BlAdressBean;
+import sdkdemo.kx.come.easypaylibrary.bean.base.ErrorBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.SpAdressBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.authorization.AuthorizationBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.authorization.AuthorizationResp;
@@ -216,6 +220,11 @@ public class AuthorizationActivity extends BaseActivity {
             @Override
             public void onError(String mResultMessage) {
                 Log.i("zt", "onError:" + mResultMessage);
+               ErrorBean errorBean= com.alibaba.fastjson.JSONObject.parseObject(mResultMessage,ErrorBean.class);
+                if (errorBean.getErrorCode().equals("E3")){
+                    Toast.makeText(AuthorizationActivity.this, "Repeat the order",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }
@@ -225,7 +234,7 @@ public class AuthorizationActivity extends BaseActivity {
         bean.setInputCharset("1");
 
         bean.setVersion("v1.0");
-        bean.setSignType(0);
+        bean.setSignType("0");
         bean.setTradeNature("GOODS");
 
         BlAdressBean blAdressBean = new BlAdressBean();
@@ -251,8 +260,8 @@ public class AuthorizationActivity extends BaseActivity {
         spAdressBean.setCountry(parseViewText(mETTxtShippingAddress6));
         bean.setSpAdressBean(spAdressBean);
 
-        bean.setSignMsg("acbc9065db92add6be219d62208dffe5");
-        bean.setPayType(Integer.valueOf(mPayType));
+
+        bean.setPayType(mPayType);
         bean.setMerchantId(parseViewText(mMerNo));
         bean.setOrderNo(parseViewText(mOrderNo));
         bean.setExt2("");

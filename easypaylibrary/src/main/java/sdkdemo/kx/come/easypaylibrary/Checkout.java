@@ -117,7 +117,13 @@ public final class Checkout{
                     @Override
                     public void onComplete() {
                         Log.i("zt", "onComplete:"+data);
-                        mPaymentResult.successPayment(data);
+                       JSONObject jsonObject=JSONObject.parseObject(data);
+                       if (jsonObject.getString("errorCode").equals("E3")){
+                           mPaymentResult.failurePayment(data);
+                       }else {
+                           mPaymentResult.successPayment(data);
+                       }
+
 
                     }
                 });

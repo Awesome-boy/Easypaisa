@@ -10,14 +10,15 @@ public class AuthorizationBean implements Serializable {
 
     private String inputCharset;
     private String version;
-    private int signType;
+    private String signType;
     private String tradeNature;
+    private String ext1;
     private String ext2;
     private extTL extTLbean;
     private BlAdressBean blAdressBean;
     private SpAdressBean spAdressBean;
     private String signMsg;
-    private int payType;
+    private String payType;
     private String merchantId;
     private String orderNo;
     private String orderAmount;
@@ -81,11 +82,11 @@ public class AuthorizationBean implements Serializable {
         this.version = version;
     }
 
-    public int getSignType() {
+    public String getSignType() {
         return signType;
     }
 
-    public void setSignType(int signType) {
+    public void setSignType(String signType) {
         this.signType = signType;
     }
 
@@ -107,11 +108,11 @@ public class AuthorizationBean implements Serializable {
         this.signMsg = signMsg;
     }
 
-    public int getPayType() {
+    public String getPayType() {
         return payType;
     }
 
-    public void setPayType(int payType) {
+    public void setPayType(String payType) {
         this.payType = payType;
     }
 
@@ -305,6 +306,14 @@ public class AuthorizationBean implements Serializable {
 
     public void setExtTLbean(extTL extTLbean) {
         this.extTLbean = extTLbean;
+    }
+
+    public String getExt1() {
+        return ext1;
+    }
+
+    public void setExt1(String ext1) {
+        this.ext1 = ext1;
     }
 
     public String getExt2() {

@@ -7,6 +7,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import org.json.JSONException;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import androidx.annotation.Nullable;
 
 import butterknife.BindView;
@@ -19,6 +24,7 @@ import sdkdemo.kx.come.easypaylibrary.bean.base.BlAdressBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.SpAdressBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.payment.PaymentBean;
 import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
+import sdkdemo.kx.come.easypaylibrary.tools.MD5;
 
 public class PaymentActivity extends BaseActivity {
 
@@ -203,9 +209,8 @@ public class PaymentActivity extends BaseActivity {
     private PaymentBean setBean() {
         PaymentBean bean = new PaymentBean();
         bean.setInputCharset("1");
-
         bean.setVersion("v1.0");
-        bean.setSignType(0);
+        bean.setSignType("0");
         bean.setTradeNature("GOODS");
 
         BlAdressBean blAdressBean = new BlAdressBean();
@@ -231,9 +236,7 @@ public class PaymentActivity extends BaseActivity {
         spAdressBean.setCountry(parseViewText(mETTxtShippingAddress6));
         bean.setSpAdressBean(spAdressBean);
 
-        // payment
-        bean.setSignMsg("8f0e5fd0b3797194f27f0f547dcf9e0c");
-        bean.setPayType(Integer.valueOf(mPayType));
+        bean.setPayType(mPayType);
         bean.setMerchantId(parseViewText(mMerNo));
         bean.setOrderNo(parseViewText(mOrderNo));
         bean.setOrderCurrency(mCurrency);
@@ -262,6 +265,9 @@ public class PaymentActivity extends BaseActivity {
 
         // TODO: 2019-10-21 miss the order item
         bean.setSecretKey(parseViewText(mETSignKey));
+
+        // payment
+        bean.setSignMsg("8f0e5fd0b3797194f27f0f547dcf9e0c");
         return bean;
     }
 

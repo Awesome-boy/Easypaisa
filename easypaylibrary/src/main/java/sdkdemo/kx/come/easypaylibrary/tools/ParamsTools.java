@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.Map;
 
 import androidx.collection.ArrayMap;
@@ -25,6 +26,8 @@ import sdkdemo.kx.come.easypaylibrary.bean.base.refund.RefundBean;
 
 public class ParamsTools {
 
+    private static String desData;
+
     public static Map<String,String> setParams(PaymentBean bean) {
         Map<String, String> params = new ArrayMap<>();
         if (bean!=null){
@@ -34,8 +37,13 @@ public class ParamsTools {
             params.put("tradeNature",bean.getTradeNature()  );
             params.put("billingAddress",  JSON.toJSONString(bean.getBlAdressBean()));
             params.put("shippingAddress", JSON.toJSONString(bean.getSpAdressBean()) );
-            params.put("signMsg", bean.getSignMsg() );
-            params.put("payType", String.valueOf(bean.getPayType()));
+
+            String md5=MD5.buildSign(CheckoutTools.setMap(bean),bean.getSecretKey());
+            String md5Data=MD5.getMD5(md5);
+            Log.d("md5",md5);
+            Log.d("md5Data",md5Data);
+            params.put("signMsg", md5Data );
+            params.put("payType", bean.getPayType());
             params.put("merchantId", bean.getMerchantId() );
             params.put("orderNo", bean.getOrderNo() );
             params.put("orderCurrency", bean.getOrderCurrency() );
@@ -59,6 +67,8 @@ public class ParamsTools {
             params.put("freightAmt", String.valueOf(bean.getFreightAmt()) );
             params.put("dutyAmt", String.valueOf(bean.getDutyAmt()) );
             params.put("secretKey", bean.getSecretKey() );
+
+
         }
         return params;
     }
@@ -92,16 +102,22 @@ public class ParamsTools {
             Log.d("3des1",jsonObject.toString());
             try {
 
-                String desData= TripleDES.encrypt3DES(jsonObject.toString().getBytes(),tdesKey.getBytes());
+                desData = TripleDES.encrypt3DES(jsonObject.toString().getBytes(),tdesKey.getBytes());
 //                String Str=desData.replace("\n", "");
-                params.put("extTL",desData);
+                params.put("extTL", desData);
             } catch (Exception e) {
                 e.printStackTrace();
 
             }
             params.put("billingAddress",  JSON.toJSONString(bean.getBlAdressBean()));
             params.put("shippingAddress", JSON.toJSONString(bean.getSpAdressBean()) );
-            params.put("signMsg", bean.getSignMsg() );
+            Log.d("3des1",desData);
+           Map<String,String> map= CheckoutTools.setAuthMap(bean,desData);
+            String md5=MD5.buildSign(map,bean.getSecretKey());
+            String md5Data=MD5.getMD5(md5);
+            Log.d("md5",md5);
+            Log.d("md5Data",md5Data);
+            params.put("signMsg", md5Data );
             params.put("payType", String.valueOf(bean.getPayType()));
             params.put("merchantId", bean.getMerchantId() );
             params.put("orderNo", bean.getOrderNo() );

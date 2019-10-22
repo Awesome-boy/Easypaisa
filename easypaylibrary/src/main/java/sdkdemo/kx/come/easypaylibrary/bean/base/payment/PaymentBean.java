@@ -10,7 +10,7 @@ public class PaymentBean implements Serializable {
 
     private String inputCharset;
     private String version;
-    private int signType;
+    private String signType;
     private String tradeNature;
 
     private BlAdressBean blAdressBean;
@@ -20,7 +20,7 @@ public class PaymentBean implements Serializable {
 
 
     private String signMsg;
-    private int payType;
+    private String payType;
     private String merchantId;
     private String orderNo;
     private String orderAmount;
@@ -77,11 +77,11 @@ public class PaymentBean implements Serializable {
         this.version = version;
     }
 
-    public int getSignType() {
+    public String getSignType() {
         return signType;
     }
 
-    public void setSignType(int signType) {
+    public void setSignType(String signType) {
         this.signType = signType;
     }
 
@@ -103,11 +103,11 @@ public class PaymentBean implements Serializable {
         this.signMsg = signMsg;
     }
 
-    public int getPayType() {
+    public String getPayType() {
         return payType;
     }
 
-    public void setPayType(int payType) {
+    public void setPayType(String payType) {
         this.payType = payType;
     }
 

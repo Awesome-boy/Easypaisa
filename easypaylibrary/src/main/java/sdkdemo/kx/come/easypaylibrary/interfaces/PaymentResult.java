@@ -31,7 +31,7 @@ public final class PaymentResult {
     }
 
     public void failurePayment(String resultMessage) {
-//        resultInformation(PAY_STATE_FAILED, resultMessage);
+        resultInformation(PAY_STATE_FAILED, resultMessage);
     }
 
     public void failurePayment(int code, String msg, String transactionId) {
@@ -59,14 +59,13 @@ public final class PaymentResult {
     }
 
     private void resultInformation(int code, String mResultMessage) {
-        activityFinish();
         try {
             switch (code) {
                 case PaymentResult.PAY_STATE_CANCEL:
 //                    paymentCallback.onCancel(mResultMessage);
                     break;
                 case PaymentResult.PAY_STATE_FAILED:
-//                    paymentCallback.onError(mResultMessage);
+                    paymentCallback.onError(mResultMessage);
                     break;
                 case PaymentResult.PAY_STATE_SUCCESS:
                     paymentCallback.onSuccess(mResultMessage);
