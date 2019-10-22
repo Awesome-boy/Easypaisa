@@ -16,8 +16,6 @@ import butterknife.OnItemSelected;
 import sdkdemo.kx.come.easypaylibrary.Checkout;
 import sdkdemo.kx.come.easypaylibrary.activity.WebViewActivity;
 import sdkdemo.kx.come.easypaylibrary.bean.base.order.OrderCheckBean;
-import sdkdemo.kx.come.easypaylibrary.bean.base.refund.RefundBean;
-import sdkdemo.kx.come.easypaylibrary.httpService.ApiService;
 import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
 
 public class PreAuthorizationActivity extends BaseActivity {
