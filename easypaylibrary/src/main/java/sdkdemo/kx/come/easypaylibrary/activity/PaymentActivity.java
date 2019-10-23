@@ -100,14 +100,6 @@ public final class PaymentActivity extends Activity {
     }
 
     private void sendPaymentQuest(String type, Object bean,RequestControl mControl) {
-        //    public final static String REQUES_PAY = "payment";
-        //    public final static String REQUES_AUTH = "auth";
-        //    public final static String REQUES_GEN = "gen";
-        //    public final static String REQUES_PARSE = "parse";
-        //    public final static String REQUES_INQURY = "inquery";
-        //    public final static String REQUES_REFUND = "refund";
-        //    public final static String REQUES_VOID = "void";
-        //    public final static String REQUES_PREAUTH = "preauth";
         switch (type){
             case CheckoutTools.REQUES_PAY:
                 PaymentBean paymentBean= (PaymentBean) bean;

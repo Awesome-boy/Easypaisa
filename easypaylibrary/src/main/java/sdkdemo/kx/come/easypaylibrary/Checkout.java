@@ -126,7 +126,7 @@ public final class Checkout{
                     @Override
                     public void onComplete() {
                         Log.i("zt", "onComplete:");
-//                        mPaymentResult.successPayment(data);
+                        mPaymentResult.successPayment(data);
                         mControl.visitWebView(data);
 
                     }
