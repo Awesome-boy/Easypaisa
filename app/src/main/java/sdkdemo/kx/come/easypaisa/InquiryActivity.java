@@ -2,6 +2,7 @@ package sdkdemo.kx.come.easypaisa;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.EditText;
 
@@ -34,10 +35,18 @@ public class InquiryActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inquiry);
         ButterKnife.bind(this);
+
     }
+
+
 
     @OnClick(R.id.btn_confirm)
     protected void onClick() {
+        String qrData=parseViewText(mETTxtInquiry2);
+        if (qrData.equals("")||TextUtils.isEmpty(qrData)){
+            showToast(this,getString(R.string.orderNo));
+            return;
+        }
         sendRequest();
     }
 

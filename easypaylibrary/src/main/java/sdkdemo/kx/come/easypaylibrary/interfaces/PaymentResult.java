@@ -62,7 +62,7 @@ public final class PaymentResult {
         try {
             switch (code) {
                 case PaymentResult.PAY_STATE_CANCEL:
-//                    paymentCallback.onCancel(mResultMessage);
+                    paymentCallback.onCancel(mResultMessage);
                     break;
                 case PaymentResult.PAY_STATE_FAILED:
                     paymentCallback.onError(mResultMessage);

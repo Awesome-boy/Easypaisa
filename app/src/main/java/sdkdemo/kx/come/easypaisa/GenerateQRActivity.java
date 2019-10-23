@@ -44,6 +44,12 @@ public class GenerateQRActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_qr);
         ButterKnife.bind(this);
+        initView();
+    }
+
+    private void initView() {
+        mETTxtGenQR2.setText(getCurrentTime());
+        mETTxtGenQR6.setText(getCurrentTime());
     }
 
     @OnClick(R.id.btn_confirm)

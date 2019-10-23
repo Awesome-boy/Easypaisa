@@ -63,8 +63,9 @@ public final class PaymentActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-//        CardClient.setHttpKey(false);
-//        mPaymentResult.cancelPayment(String.valueOf(mAssembly.getData().get("transactionId")));
+        this.finish();
+        this.overridePendingTransition(0, android.R.anim.fade_out);
+        mPaymentResult.cancelPayment("");
     }
 
 
@@ -111,6 +112,7 @@ public final class PaymentActivity extends Activity {
 
                     @Override
                     public void onError(Throwable e) {
+                        mPaymentResult.failurePayment(data);
                         Log.i("zt", "onError:" + e);
                     }
 

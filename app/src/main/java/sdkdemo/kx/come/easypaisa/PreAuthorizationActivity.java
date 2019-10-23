@@ -2,6 +2,7 @@ package sdkdemo.kx.come.easypaisa;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -40,10 +41,20 @@ public class PreAuthorizationActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pre_authorization);
         ButterKnife.bind(this);
+        initView();
+    }
+
+    private void initView() {
+        mETTxtPreAuthorization5.setText(getCurrentTime());
     }
 
     @OnClick(R.id.btn_confirm)
     protected void onClick() {
+       String orderNo= parseViewText(mETTxtPreAuthorization2);
+        if (orderNo.equals("")||TextUtils.isEmpty(orderNo)){
+            showToast(this,getString(R.string.orderNo));
+            return;
+        }
         sendRequest();
     }
 

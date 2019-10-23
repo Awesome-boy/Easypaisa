@@ -1,8 +1,10 @@
 package sdkdemo.kx.come.easypaisa;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,6 +13,8 @@ import androidx.annotation.Nullable;
 
 public abstract class BaseActivity extends Activity {
 
+
+    private Toast toast;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,7 +28,7 @@ public abstract class BaseActivity extends Activity {
 
 
     protected String parseViewText(EditText et) {
-        return et.getText().toString();
+        return et.getText().toString().trim();
     }
 
     protected int parseToInt(EditText editText) {
@@ -40,6 +44,16 @@ public abstract class BaseActivity extends Activity {
         Date date = new Date(System.currentTimeMillis());
         String time =simpleDateFormat.format(date);
         return time;
+    }
+
+    protected void showToast(Context context, String msg){
+        if (toast==null){
+            toast = Toast.makeText(context,msg,Toast.LENGTH_SHORT);
+        }else {
+            toast.setText(msg);
+        }
+        toast.show();
+
     }
 
 
