@@ -1,16 +1,10 @@
 package sdkdemo.kx.come.easypaisa;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
-
-import org.json.JSONException;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import androidx.annotation.Nullable;
 
@@ -24,9 +18,8 @@ import sdkdemo.kx.come.easypaylibrary.bean.base.SpAdressBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.payment.PaymentBean;
 import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
 import sdkdemo.kx.come.easypaylibrary.tools.CheckoutTools;
-import sdkdemo.kx.come.easypaylibrary.tools.MD5;
 
-public class PaymentActivity extends BaseActivity {
+public class ThreeDSecurePaymentActivity extends BaseActivity {
 
     @BindView(R.id.sp_pay_type)
     Spinner mSpinner;
@@ -146,7 +139,7 @@ public class PaymentActivity extends BaseActivity {
     private void sendRequest() {
         PaymentBean bean = setBean();
         Log.d("zt", "zt--" + bean.toString());
-        Checkout.getInstance().setPayment(PaymentActivity.this,CheckoutTools.REQUES_PAY, bean, new CheckoutCallback() {
+        Checkout.getInstance().setPayment(ThreeDSecurePaymentActivity.this,CheckoutTools.REQUES_PAY, bean, new CheckoutCallback() {
             @Override
             public void onCancel(String mResultMessage) {
                 Log.i("zt", "onCancel:" + mResultMessage);

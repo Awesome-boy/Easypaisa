@@ -113,6 +113,9 @@
 -keep class **.easypaylibrary.tools.ParamsTools{
     public *;
 }
+-keep class **.easypaylibrary.tools.CheckoutTools{
+    public *;
+}
 -keep class **.easypaylibrary.Checkout{
     public *;
 }

@@ -15,8 +15,8 @@ android {
 
     }
 
-    signingConfigs{
-        release{
+    signingConfigs {
+        release {
             storeFile file(var)
             storePassword "android"
             keyAlias "paymentsdk"
@@ -37,7 +37,6 @@ android {
         }
     }
 }
-
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -56,9 +55,14 @@ dependencies {
     implementation 'com.alibaba:fastjson:1.2.56'
     implementation 'com.jakewharton:butterknife:10.2.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
-    //    implementation files('src/main/lib/easypaylibrary-debug.aar')
-//    implementation files('src/main/lib/easypaylibrary-release.aar')
-        implementation project(path: ':easypaylibrary')
-//    implementation files('libs/classes.jar')
+
+    // for the aar
+//    implementation files('src/main/lib/easypaylibrary-debug.aar')
+    implementation files('src/main/lib/easypaylibrary-release.aar')
+    // for the jar
+//    implementation files('src/main/lib/release.jar')
+//    implementation files('src/main/lib/debug.jar')
+//    implementation project(path: ':easypaylibrary')
 }
+
 
