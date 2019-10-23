@@ -12,9 +12,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import sdkdemo.kx.come.easypaylibrary.Checkout;
-import sdkdemo.kx.come.easypaylibrary.activity.WebViewActivity;
 import sdkdemo.kx.come.easypaylibrary.bean.base.refund.RefundBean;
 import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
+import sdkdemo.kx.come.easypaylibrary.tools.CheckoutTools;
 
 public class RefundActivity extends BaseActivity {
 
@@ -52,7 +52,7 @@ public class RefundActivity extends BaseActivity {
     private void refundRequest() {
         RefundBean bean = setBean();
         Log.d("zt", "zt--" + bean.toString());
-        Checkout.getInstance().refundResult(RefundActivity.this, bean, new CheckoutCallback() {
+        Checkout.getInstance().setPayment(RefundActivity.this,CheckoutTools.REQUES_REFUND, bean, new CheckoutCallback() {
             @Override
             public void onCancel(String mResultMessage) {
                 Log.i("zt", "onCancel:" + mResultMessage);
@@ -60,10 +60,7 @@ public class RefundActivity extends BaseActivity {
 
             @Override
             public void onSuccess(String mResultMessage) {
-                Intent intent = new Intent(RefundActivity.this, WebViewActivity.class);
-                intent.putExtra("data", mResultMessage);
-                startActivity(intent);
-
+                Log.i("zt", "onSuccess:" + mResultMessage);
 
             }
 

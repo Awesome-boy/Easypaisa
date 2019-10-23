@@ -2,12 +2,19 @@ package sdkdemo.kx.come.easypaylibrary.layout;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ClipDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+
+import sdkdemo.kx.come.easypaylibrary.httpService.ApiService;
 
 
 /**
@@ -18,6 +25,9 @@ public class CardWebLayout extends ViewLayout {
     private WebView webView;
     private ProgressBar progressBar;
     private View mView;
+    private WebChromeClient mWebChromeClient;
+
+
 
 
     @Override
@@ -32,18 +42,24 @@ public class CardWebLayout extends ViewLayout {
         RelativeLayout.LayoutParams webLayoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         webView.setLayoutParams(webLayoutParams);
-        setWebView();
         mRelativeLayout.addView(webView);
 
         progressBar = new ProgressBar(mContext, null, android.R.attr.progressBarStyleHorizontal);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 (int) dpTurnedToPx(2.2f));
+        ClipDrawable drawable = new ClipDrawable(new ColorDrawable(Color.RED), Gravity.LEFT, ClipDrawable.HORIZONTAL);
+        progressBar.setProgressDrawable(drawable);//必须先设置到progressbar上再设置level，告诉这个drawable的宽度有多宽，这个level才能生效
+        drawable.setLevel(0);
+        progressBar.setProgressDrawable(drawable);
+        progressBar.setProgress(0);
         progressBar.setLayoutParams(layoutParams);
         mRelativeLayout.addView(progressBar);
 
-
         mView = new LoadingLayout().createView(mContext);
         mRelativeLayout.addView(mView);
+
+
+        setWebView();
         return mRelativeLayout;
     }
 
@@ -60,32 +76,40 @@ public class CardWebLayout extends ViewLayout {
     }
 
     public void destroyWebView() {
-        webView.removeAllViews();
-        webView.destroy();
-        webView = null;
+        if (webView != null) {
+            webView.removeAllViews();
+            webView.destroy();
+            webView = null;
+        }
     }
 
-    private void setWebView() {
-        WebSettings webSettings = webView.getSettings();
-        // 支持 Js 使用
-        webSettings.setJavaScriptEnabled(true);
-        // 开启DOM缓存
-        webSettings.setDomStorageEnabled(true);
-        // 支持缩放
-        webSettings.setSupportZoom(true);
-        // 允许通过 file url 加载的 Javascript 读取其他的本地文件,Android 4.1 之前默认是true，在 Android 4.1 及以后默认是false,也就是禁止
-        webSettings.setAllowFileAccessFromFileURLs(false);
-        // 允许通过 file url 加载的 Javascript 可以访问其他的源，包括其他的文件和 http，https 等其他的源，
-        // Android 4.1 之前默认是true，在 Android 4.1 及以后默认是false,也就是禁止
-        // 如果此设置是允许，则 setAllowFileAccessFromFileURLs 不起做用
-        webSettings.setAllowUniversalAccessFromFileURLs(false);
-        //将图片调整到适合webview的大小
-        webSettings.setUseWideViewPort(true);
-        //缩放操作
-        webSettings.setBuiltInZoomControls(true); //设置内置的缩放控件。若为false，则该WebView不可缩放
-        webSettings.setDisplayZoomControls(false); //隐藏原生的缩放控件
-        //支持自动加载图片
-        webSettings.setLoadsImagesAutomatically(true);
-        webSettings.setDefaultTextEncodingName("utf-8");//设置编码格
+    protected void setWebView() {
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setPluginState(WebSettings.PluginState.ON);
+        webView.setWebChromeClient(new WebChromeClient());
+        webView.getSettings().setSavePassword(false);
+        webView.removeJavascriptInterface("searchBoxJavaBridge_");
+        webView.removeJavascriptInterface("accessibility");
+        webView.removeJavascriptInterface("accessibilityTraversal");
+        initWebChromeClient();
+        webView.setWebChromeClient(mWebChromeClient);
+
+    }
+
+    private void initWebChromeClient() {
+        mWebChromeClient = new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if (newProgress == 100) {
+                    getProgressBar().setVisibility(View.GONE);
+                } else {
+                    getProgressBar().setVisibility(View.VISIBLE);
+                    getProgressBar().setProgress(newProgress);
+                }
+
+            }
+        };
+
+
     }
 }

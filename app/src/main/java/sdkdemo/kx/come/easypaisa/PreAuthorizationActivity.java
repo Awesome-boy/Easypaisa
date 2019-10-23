@@ -15,9 +15,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
 import sdkdemo.kx.come.easypaylibrary.Checkout;
-import sdkdemo.kx.come.easypaylibrary.activity.WebViewActivity;
 import sdkdemo.kx.come.easypaylibrary.bean.base.order.OrderCheckBean;
 import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
+import sdkdemo.kx.come.easypaylibrary.tools.CheckoutTools;
 
 public class PreAuthorizationActivity extends BaseActivity {
 
@@ -67,7 +67,7 @@ public class PreAuthorizationActivity extends BaseActivity {
 
     private void sendRequest() {
         OrderCheckBean bean = setBean();
-        Checkout.getInstance().orderCheck(PreAuthorizationActivity.this, bean, new CheckoutCallback() {
+        Checkout.getInstance().setPayment(PreAuthorizationActivity.this,CheckoutTools.REQUES_PREAUTH, bean, new CheckoutCallback() {
             @Override
             public void onCancel(String mResultMessage) {
                 Log.i("zt", "onCancel:" + mResultMessage);
@@ -76,9 +76,6 @@ public class PreAuthorizationActivity extends BaseActivity {
             @Override
             public void onSuccess(String mResultMessage) {
                 Log.i("zt", "onSuccess:" + mResultMessage);
-                Intent intent = new Intent(PreAuthorizationActivity.this, WebViewActivity.class);
-                intent.putExtra("data", mResultMessage);
-                startActivity(intent);
 
             }
 

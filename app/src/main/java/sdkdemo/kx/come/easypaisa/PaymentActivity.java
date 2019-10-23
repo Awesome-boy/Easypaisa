@@ -19,11 +19,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
 import sdkdemo.kx.come.easypaylibrary.Checkout;
-import sdkdemo.kx.come.easypaylibrary.activity.WebViewActivity;
 import sdkdemo.kx.come.easypaylibrary.bean.base.BlAdressBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.SpAdressBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.payment.PaymentBean;
 import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
+import sdkdemo.kx.come.easypaylibrary.tools.CheckoutTools;
 import sdkdemo.kx.come.easypaylibrary.tools.MD5;
 
 public class PaymentActivity extends BaseActivity {
@@ -146,7 +146,7 @@ public class PaymentActivity extends BaseActivity {
     private void sendRequest() {
         PaymentBean bean = setBean();
         Log.d("zt", "zt--" + bean.toString());
-        Checkout.getInstance().setPayment(PaymentActivity.this, bean, new CheckoutCallback() {
+        Checkout.getInstance().setPayment(PaymentActivity.this,CheckoutTools.REQUES_PAY, bean, new CheckoutCallback() {
             @Override
             public void onCancel(String mResultMessage) {
                 Log.i("zt", "onCancel:" + mResultMessage);
@@ -155,9 +155,6 @@ public class PaymentActivity extends BaseActivity {
             @Override
             public void onSuccess(String mResultMessage) {
                 Log.i("zt", "onSuccess:" + mResultMessage);
-                Intent intent = new Intent(PaymentActivity.this, WebViewActivity.class);
-                intent.putExtra("data", mResultMessage);
-                startActivity(intent);
 
             }
 

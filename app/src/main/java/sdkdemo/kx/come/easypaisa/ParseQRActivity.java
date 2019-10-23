@@ -13,9 +13,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import sdkdemo.kx.come.easypaylibrary.Checkout;
-import sdkdemo.kx.come.easypaylibrary.activity.WebViewActivity;
 import sdkdemo.kx.come.easypaylibrary.bean.base.parseQRBean.ParseQRBean;
 import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
+import sdkdemo.kx.come.easypaylibrary.tools.CheckoutTools;
 
 public class ParseQRActivity extends BaseActivity {
 
@@ -51,7 +51,7 @@ public class ParseQRActivity extends BaseActivity {
 
     private void sendRequest() {
         ParseQRBean bean=setBean();
-        Checkout.getInstance().parseQR(ParseQRActivity.this, bean, new CheckoutCallback() {
+        Checkout.getInstance().setPayment(ParseQRActivity.this,CheckoutTools.REQUES_PARSE, bean, new CheckoutCallback() {
             @Override
             public void onCancel(String mResultMessage) {
                 Log.i("zt", "onCancel:" + mResultMessage);
@@ -60,9 +60,6 @@ public class ParseQRActivity extends BaseActivity {
             @Override
             public void onSuccess(String mResultMessage) {
                 Log.i("zt", "onSuccess:" + mResultMessage);
-                Intent intent = new Intent(ParseQRActivity.this, WebViewActivity.class);
-                intent.putExtra("data", mResultMessage);
-                startActivity(intent);
 
             }
 

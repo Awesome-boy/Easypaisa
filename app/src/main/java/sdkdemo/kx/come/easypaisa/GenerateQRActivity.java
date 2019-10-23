@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -14,9 +15,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
 import sdkdemo.kx.come.easypaylibrary.Checkout;
-import sdkdemo.kx.come.easypaylibrary.activity.WebViewActivity;
 import sdkdemo.kx.come.easypaylibrary.bean.base.genQR.GenQRBean;
 import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
+import sdkdemo.kx.come.easypaylibrary.tools.CheckoutTools;
 
 public class GenerateQRActivity extends BaseActivity {
 
@@ -60,7 +61,7 @@ public class GenerateQRActivity extends BaseActivity {
 
     private void sendRequest() {
         GenQRBean bean = setBean();
-        Checkout.getInstance().genQR(GenerateQRActivity.this, bean, new CheckoutCallback() {
+        Checkout.getInstance().setPayment(GenerateQRActivity.this,CheckoutTools.REQUES_GEN, bean, new CheckoutCallback() {
             @Override
             public void onCancel(String mResultMessage) {
                 Log.i("zt", "onCancel:" + mResultMessage);
@@ -69,9 +70,6 @@ public class GenerateQRActivity extends BaseActivity {
             @Override
             public void onSuccess(String mResultMessage) {
                 Log.i("zt", "onSuccess:" + mResultMessage);
-                Intent intent = new Intent(GenerateQRActivity.this, WebViewActivity.class);
-                intent.putExtra("data", mResultMessage);
-                startActivity(intent);
 
             }
 

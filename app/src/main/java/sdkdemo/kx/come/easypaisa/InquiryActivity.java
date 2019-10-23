@@ -12,9 +12,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import sdkdemo.kx.come.easypaylibrary.Checkout;
-import sdkdemo.kx.come.easypaylibrary.activity.WebViewActivity;
 import sdkdemo.kx.come.easypaylibrary.bean.base.query.QueryBean;
 import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
+import sdkdemo.kx.come.easypaylibrary.tools.CheckoutTools;
 
 public class InquiryActivity extends BaseActivity {
 
@@ -53,7 +53,7 @@ public class InquiryActivity extends BaseActivity {
     private void sendRequest() {
         QueryBean bean = setBean();
         Log.d("zt", "zt--" + bean.toString());
-        Checkout.getInstance().queryResult(InquiryActivity.this, bean, new CheckoutCallback() {
+        Checkout.getInstance().setPayment(InquiryActivity.this,CheckoutTools.REQUES_INQURY, bean, new CheckoutCallback() {
             @Override
             public void onCancel(String mResultMessage) {
                 Log.i("zt", "onCancel:" + mResultMessage);
@@ -62,9 +62,6 @@ public class InquiryActivity extends BaseActivity {
             @Override
             public void onSuccess(String mResultMessage) {
                 Log.i("zt", "onSuccess:" + mResultMessage);
-                Intent intent = new Intent(InquiryActivity.this, WebViewActivity.class);
-                intent.putExtra("data", mResultMessage);
-                startActivity(intent);
 
             }
 

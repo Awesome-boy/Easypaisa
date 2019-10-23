@@ -20,11 +20,22 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
+import sdkdemo.kx.come.easypaylibrary.Checkout;
+import sdkdemo.kx.come.easypaylibrary.bean.base.authorization.AuthorizationBean;
+import sdkdemo.kx.come.easypaylibrary.bean.base.genQR.GenQRBean;
+import sdkdemo.kx.come.easypaylibrary.bean.base.order.OrderCheckBean;
+import sdkdemo.kx.come.easypaylibrary.bean.base.parseQRBean.ParseQRBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.payment.PaymentBean;
 import sdkdemo.kx.come.easypaylibrary.bean.base.query.QueryBean;
+import sdkdemo.kx.come.easypaylibrary.bean.base.reback.VoidBean;
+import sdkdemo.kx.come.easypaylibrary.bean.base.refund.RefundBean;
+import sdkdemo.kx.come.easypaylibrary.control.RequestControl;
 import sdkdemo.kx.come.easypaylibrary.httpService.RetrofitClient;
+import sdkdemo.kx.come.easypaylibrary.interfaces.Callback;
+import sdkdemo.kx.come.easypaylibrary.interfaces.CheckoutCallback;
 import sdkdemo.kx.come.easypaylibrary.interfaces.PaymentResult;
 import sdkdemo.kx.come.easypaylibrary.layout.CardWebLayout;
+import sdkdemo.kx.come.easypaylibrary.layout.CustomPopupWindow;
 import sdkdemo.kx.come.easypaylibrary.tools.CheckoutTools;
 import sdkdemo.kx.come.easypaylibrary.tools.ParamsTools;
 
@@ -38,8 +49,10 @@ public final class PaymentActivity extends Activity {
     private CardWebLayout customerLayout;
     private PaymentResult mPaymentResult;
     private boolean popupwindowDisplayKey = true;
-
-    private Map<String, String> params;
+    private Object bean;
+    private String type;
+    private Activity activity;
+    private RequestControl mControl;
 
 
     @Override
@@ -53,9 +66,12 @@ public final class PaymentActivity extends Activity {
     }
 
     private void init() {
-        PaymentBean paymentBean = (PaymentBean) getIntent().getSerializableExtra(CheckoutTools.INFO);
-        params = ParamsTools.setParams(paymentBean);
+        type = getIntent().getStringExtra(CheckoutTools.TYPE);
+        bean =  getIntent().getSerializableExtra(CheckoutTools.INFO);
+        CustomPopupWindow customPopupWindow=new CustomPopupWindow(PaymentActivity.this);
         mPaymentResult = new PaymentResult(PaymentActivity.this);
+        mControl = new RequestControl(customPopupWindow,customerLayout,mPaymentResult);
+        activity=PaymentActivity.this;
         initListener();
 
     }
@@ -76,53 +92,54 @@ public final class PaymentActivity extends Activity {
                     public void onGlobalLayout() {
                         if (popupwindowDisplayKey) {
                             popupwindowDisplayKey = false;
-                            sendPaymentQuest();
+                            sendPaymentQuest(type,bean,mControl);
 
                         }
                     }
                 });
     }
 
-
-    private void sendPaymentQuest() {
-        RetrofitClient.getInstance(PaymentActivity.this)
-                .getApiService()
-                .getOrder(params)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ResponseBody>() {
-                    private String data;
-
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                        Log.i("zt", "onSubscribe:");
-                    }
-
-                    @Override
-                    public void onNext(ResponseBody value) {
-                        Log.i("zt", "onNext:" + value);
-                        try {
-                            data = value.string();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-
-                    @Override
-                    public void onError(Throwable e) {
-                        mPaymentResult.failurePayment(data);
-                        Log.i("zt", "onError:" + e);
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.i("zt", "onComplete:");
-                        mPaymentResult.successPayment(data);
-                    }
-                });
+    private void sendPaymentQuest(String type, Object bean,RequestControl mControl) {
+        //    public final static String REQUES_PAY = "payment";
+        //    public final static String REQUES_AUTH = "auth";
+        //    public final static String REQUES_GEN = "gen";
+        //    public final static String REQUES_PARSE = "parse";
+        //    public final static String REQUES_INQURY = "inquery";
+        //    public final static String REQUES_REFUND = "refund";
+        //    public final static String REQUES_VOID = "void";
+        //    public final static String REQUES_PREAUTH = "preauth";
+        switch (type){
+            case CheckoutTools.REQUES_PAY:
+                PaymentBean paymentBean= (PaymentBean) bean;
+                Checkout.sendPaymentQuest(activity,paymentBean,mControl);
+                break;
+            case CheckoutTools.REQUES_GEN:
+                GenQRBean genQRBean= (GenQRBean) bean;
+                Checkout.genQR(activity,genQRBean,mControl);
+                break;
+            case CheckoutTools.REQUES_PARSE:
+                ParseQRBean parseQRBean= (ParseQRBean) bean;
+                Checkout.parseQR(activity,parseQRBean,mControl);
+                break;
+            case CheckoutTools.REQUES_INQURY:
+                QueryBean queryBean= (QueryBean) bean;
+                Checkout.queryResult(activity,queryBean,mControl);
+                break;
+            case CheckoutTools.REQUES_REFUND:
+                RefundBean refundBean= (RefundBean) bean;
+                Checkout.refundResult(activity,refundBean,mControl);
+                break;
+            case CheckoutTools.REQUES_VOID:
+                VoidBean voidBean= (VoidBean) bean;
+                Checkout.reback(activity,voidBean,mControl);
+                break;
+            case CheckoutTools.REQUES_PREAUTH:
+                OrderCheckBean orderCheckBean= (OrderCheckBean) bean;
+                Checkout.orderCheck(activity,orderCheckBean,mControl);
+                break;
+        }
     }
+
 
 
     @Override

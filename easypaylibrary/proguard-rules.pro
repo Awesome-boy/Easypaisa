@@ -103,7 +103,7 @@
     public *;
 }
 
--keep class **.easypaylibrary.exception.**{*;}
+-keep class  **.easypaylibrary.exception.**{*;}
 -keep class **.easypaylibrary.interfaces.**{*;}
 -keep class **.easypaylibrary.bean.base.**
 
