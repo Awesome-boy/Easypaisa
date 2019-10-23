@@ -2,6 +2,7 @@ package sdkdemo.kx.come.easypaisa;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.EditText;
 
@@ -41,6 +42,11 @@ public class VoidActivity extends BaseActivity {
 
     @OnClick(R.id.btn_confirm)
     protected void onClick() {
+        String originalOrder=parseViewText(mETTxtVoid5);
+        if (originalOrder.equals("")||TextUtils.isEmpty(originalOrder)){
+            showToast(this,getString(R.string.orignalCode));
+            return;
+        }
         voidRequest();
     }
 

@@ -99,7 +99,9 @@
             style="@style/InputText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:layout_marginStart="@dimen/text_width"
+            android:layout_marginTop="0dp"
             android:background="@drawable/background_edittext"
             android:paddingStart="@dimen/padding_start"
             android:text="20191020151954" />

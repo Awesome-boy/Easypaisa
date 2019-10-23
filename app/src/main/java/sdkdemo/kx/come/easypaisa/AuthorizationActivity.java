@@ -150,6 +150,12 @@ public class AuthorizationActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authorization);
         ButterKnife.bind(this);
+        initView();
+    }
+
+    private void initView() {
+        mOrderNo.setText(getCurrentTime());
+        mETTxt4.setText(getCurrentTime());
     }
 
     @OnClick(R.id.btn_confirm)

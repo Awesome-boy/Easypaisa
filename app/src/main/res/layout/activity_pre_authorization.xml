@@ -46,7 +46,7 @@
             android:layout_marginStart="@dimen/text_width"
             android:background="@drawable/background_edittext"
             android:paddingStart="@dimen/padding_start"
-            android:text="20191020151154" />
+            android:text="" />
 
         <TextView
             style="@style/InputText"

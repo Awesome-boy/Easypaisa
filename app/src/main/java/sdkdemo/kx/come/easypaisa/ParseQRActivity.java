@@ -2,8 +2,10 @@ package sdkdemo.kx.come.easypaisa;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -38,6 +40,11 @@ public class ParseQRActivity extends BaseActivity {
 
     @OnClick(R.id.btn_confirm)
     protected void onClick() {
+        String qrData=parseViewText(mETTxtParseQR3);
+        if (qrData.equals("")||TextUtils.isEmpty(qrData)){
+            showToast(this,getString(R.string.qrCode));
+            return;
+        }
         sendRequest();
 
     }
