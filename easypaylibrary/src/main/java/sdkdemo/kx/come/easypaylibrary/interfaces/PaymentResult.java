@@ -34,16 +34,14 @@ public final class PaymentResult {
         resultInformation(PAY_STATE_FAILED, resultMessage);
     }
 
-    public void failurePayment(int code, String msg, String transactionId) {
-//        resultInformation(PAY_STATE_FAILED, getNullResultMessage(code, msg, transactionId));
-    }
+
 
     public void successPayment(String resultMessage) {
         resultInformation(PAY_STATE_SUCCESS, resultMessage);
     }
 
-    public void cancelPayment(String transactionId) {
-//        resultInformation(PAY_STATE_CANCEL, getNullResultMessage(-2, "Cancel the transaction", transactionId));
+    public void cancelPayment(String resultMessage) {
+        resultInformation(PAY_STATE_CANCEL, resultMessage);
     }
 
     private String getNullResultMessage(int code, String msg, String transactionId) {

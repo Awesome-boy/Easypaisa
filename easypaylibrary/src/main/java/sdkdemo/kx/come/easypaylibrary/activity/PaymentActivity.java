@@ -81,7 +81,7 @@ public final class PaymentActivity extends Activity {
     public void onBackPressed() {
         this.finish();
         this.overridePendingTransition(0, android.R.anim.fade_out);
-        mPaymentResult.cancelPayment("");
+        mPaymentResult.cancelPayment("cancel");
     }
 
 

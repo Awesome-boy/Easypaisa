@@ -112,6 +112,7 @@ public final class Checkout{
                             data = value.string();
                         } catch (IOException e) {
                             e.printStackTrace();
+                            mPaymentResult.failurePayment("");
                         }
 
                     }
@@ -119,7 +120,7 @@ public final class Checkout{
 
                     @Override
                     public void onError(Throwable e) {
-                        mPaymentResult.failurePayment(data);
+                        mPaymentResult.failurePayment("");
                         Log.i("zt", "onError:" + e);
                     }
 
@@ -202,6 +203,7 @@ public final class Checkout{
                             data = value.string();
                         } catch (IOException e) {
                             e.printStackTrace();
+                            mPaymentResult.failurePayment("");
                         }
 
 
@@ -211,6 +213,7 @@ public final class Checkout{
                     @Override
                     public void onError(Throwable e) {
                         Log.i("zt", "onError:" + e);
+                        mPaymentResult.failurePayment("");
                     }
 
                     @Override
@@ -246,6 +249,7 @@ public final class Checkout{
                             data = value.string();
                         } catch (IOException e) {
                             e.printStackTrace();
+                            mPaymentResult.failurePayment("");
                         }
                     }
 
@@ -253,6 +257,7 @@ public final class Checkout{
                     @Override
                     public void onError(Throwable e) {
                         Log.i("zt", "onError:" + e);
+                        mPaymentResult.failurePayment("");
                     }
 
                     @Override
@@ -287,6 +292,7 @@ public final class Checkout{
                             data=value.string();
                         } catch (IOException e) {
                             e.printStackTrace();
+                            mPaymentResult.failurePayment("");
                         }
                     }
 
@@ -294,6 +300,7 @@ public final class Checkout{
                     @Override
                     public void onError(Throwable e) {
                         Log.i("zt", "onError:" + e);
+                        mPaymentResult.failurePayment("");
                     }
 
                     @Override
@@ -329,6 +336,7 @@ public final class Checkout{
                             data=value.string();
                         } catch (IOException e) {
                             e.printStackTrace();
+                            mPaymentResult.failurePayment("");
                         }
                     }
 
@@ -336,6 +344,7 @@ public final class Checkout{
                     @Override
                     public void onError(Throwable e) {
                         Log.i("zt", "onError:" + e);
+                        mPaymentResult.failurePayment("");
                     }
 
                     @Override
@@ -369,6 +378,7 @@ public final class Checkout{
                             data = value.string();
                         } catch (IOException e) {
                             e.printStackTrace();
+                            mPaymentResult.failurePayment("");
                         }
                     }
 
@@ -414,6 +424,7 @@ public final class Checkout{
                             data = value.string();
                         } catch (IOException e) {
                             e.printStackTrace();
+                            mPaymentResult.failurePayment("");
                         }
                     }
 
@@ -421,6 +432,7 @@ public final class Checkout{
                     @Override
                     public void onError(Throwable e) {
                         Log.i("zt", "onError:" + e);
+                        mPaymentResult.failurePayment("");
                     }
 
                     @Override
