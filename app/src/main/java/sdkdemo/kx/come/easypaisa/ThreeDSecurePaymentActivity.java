@@ -1,15 +1,22 @@
 package sdkdemo.kx.come.easypaisa;
 
+import android.net.Uri;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
+
+import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -123,6 +130,9 @@ public class ThreeDSecurePaymentActivity extends BaseActivity {
     @BindView(R.id.wv_payment)
     WebView mWebView;
 
+    @BindView(R.id.sv_payment)
+    ScrollView mSvPayment;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -130,10 +140,11 @@ public class ThreeDSecurePaymentActivity extends BaseActivity {
         setContentView(R.layout.activity_payment);
         ButterKnife.bind(this);
         initView();
-        sendRequest();
     }
 
     private void initView() {
+        mSvPayment.setVisibility(View.VISIBLE);
+        mWebView.setVisibility(View.GONE);
         mOrderNo.setText(getCurrentTime());
         mETTxt4.setText(getCurrentTime());
     }
@@ -141,6 +152,8 @@ public class ThreeDSecurePaymentActivity extends BaseActivity {
     @OnClick(R.id.btn_confirm)
     protected void onClick() {
         sendRequest();
+        mSvPayment.setVisibility(View.GONE);
+        mWebView.setVisibility(View.VISIBLE);
     }
 
     private void sendRequest() {
@@ -175,40 +188,45 @@ public class ThreeDSecurePaymentActivity extends BaseActivity {
         mWebView.loadData(constructHtmlData(bean), "text/html", "UTF-8");
     }
 
+
     private String constructHtmlData(PaymentBean bean) {
+
+        Gson gson = new Gson();
+        String billingAddress = gson.toJson(bean.getBlAdressBean());
+        String shippingAddress = gson.toJson(bean.getSpAdressBean());
         String data = "<html>\n" +
                 "<body onload=\"load()\">\n" +
                 "<form id =\"payment_form\" action=\"http://sd.coshine.com/gateway/gateway/payment\" method=\"post\" >\n" +
                 "    <input type=\"text\"  name=\"version\" value=\"v1.0\">\n" +
                 "    <input type=\"text\"  name=\"signType\" value=\"0\">\n" +
                 "    <input type=\"text\"  name=\"tradeNature\" value=\"GOODS\">\n" +
-                "    <input type=\"text\"  name=\"billingAddress\" value='{\"firstName\":\"john\",\"lastName\":\"connor\",\"address1\":\"Muster Str. 12\",\"address2\":\"\",\"zipCode\":\"10178\",\"city\":\"Los Angeles\",\"country\":\"US\"}'>\n" +
-                "    <input type=\"text\"  name=\"shippingAddress\" value='{\"firstName\":\"john\",\"lastName\":\"connor\",\"address1\":\"Muster Str. 12\",\"address2\":\"\",\"zipCode\":\"10178\",\"city\":\"Los Angeles\",\"country\":\"US\"}'>\n" +
-                "    <input type=\"text\"  name=\"payType\" value=\"13\">\n" +
-                "    <input type=\"text\"  name=\"merchantId\" value=\"010704515311001\">\n" +
+                "    <input type=\"text\"  name=\"billingAddress\" value=\'"+billingAddress+"\'>\n" +
+                "    <input type=\"text\"  name=\"shippingAddress\" value=\'"+shippingAddress+"\'>\n" +
+                "    <input type=\"text\"  name=\"payType\" value=" + bean.getPayType() + ">\n" +
+                "    <input type=\"text\"  name=\"merchantId\" value=" + bean.getMerchantId() + ">\n" +
                 "    <input type=\"text\"  name=\"orderNo\" value=" + bean.getOrderNo() + ">+\n" +
-                "    <input type=\"text\"  name=\"orderCurrency\" value=\"840\">\n" +
-                "    <input type=\"text\"  name=\"orderAmount\" value=\"0.11\">\n" +
-                "    <input type=\"text\"  name=\"orderDatetime\" value=\"20191021100208\">\n" +
-                "    <input type=\"text\"  name=\"pickupUrl\" value=\"http://sd.coshine.com:80/gateway/tests/payment_result.jsp\">\n" +
-                "    <input type=\"text\"  name=\"receiveUrl\" value=\"http://sd.coshine.com:80/gateway/tests/payment_callback.jsp\">\n" +
-                "    <input type=\"text\"  name=\"payerEmail\" value=\"paygwy@test.com\">\n" +
-                "    <input type=\"text\"  name=\"payerTelephone\" value=\"13888888888\">\n" +
-                "    <input type=\"text\"  name=\"IPAddress\" value=\"113.246.97.101\">\n" +
-                "    <input type=\"text\"  name=\"crdLvl\" value=\"1\">\n" +
-                "    <input type=\"text\"  name=\"taxAmt\" value=\"1\">\n" +
-                "    <input type=\"text\"  name=\"custCd\" value=\"1\">\n" +
-                "    <input type=\"text\"  name=\"mchPostCd\" value=\"1\">\n" +
-                "    <input type=\"text\"  name=\"taxId\" value=\"1\">\n" +
-                "    <input type=\"text\"  name=\"mchMinorityCd\" value=\"1\">\n" +
-                "    <input type=\"text\"  name=\"mchStateCd\" value=\"1\">\n" +
-                "    <input type=\"text\"  name=\"shipPostCd\" value=\"1\">\n" +
-                "    <input type=\"text\"  name=\"destPostCd\" value=\"1\">\n" +
-                "    <input type=\"text\"  name=\"invoiceNum\" value=\"1\">\n" +
-                "    <input type=\"text\"  name=\"freightAmt\" value=\"1\">\n" +
-                "    <input type=\"text\"  name=\"dutyAmt\" value=\"1\">\n" +
-                "    <input type=\"text\"  name=\"secretKey\" value=\"ZloDcaGkb1zP9/L7LkgWDA==\">\n" +
-                "    <input type=\"text\"  name=\"signMsg\" value=\"8f0e5fd0b3797194f27f0f547dcf9e0c\">\n" +
+                "    <input type=\"text\"  name=\"orderCurrency\" value=" + bean.getOrderCurrency() + ">\n" +
+                "    <input type=\"text\"  name=\"orderAmount\" value=" + bean.getOrderAmount() + ">\n" +
+                "    <input type=\"text\"  name=\"orderDatetime\" value=" + bean.getOrderDatetime() + ">\n" +
+                "    <input type=\"text\"  name=\"pickupUrl\" value=" + bean.getPickupUrl() + ">\n" +
+                "    <input type=\"text\"  name=\"receiveUrl\" value=" + bean.getReceiveUrl() + ">\n" +
+                "    <input type=\"text\"  name=\"payerEmail\" value=" + bean.getPayerEmail() + ">\n" +
+                "    <input type=\"text\"  name=\"payerTelephone\" value=" + bean.getPayerTelephone() + ">\n" +
+                "    <input type=\"text\"  name=\"IPAddress\" value=" + bean.getIPAdress() + ">\n" +
+                "    <input type=\"text\"  name=\"crdLvl\" value=" + bean.getCrdLvl() + ">\n" +
+                "    <input type=\"text\"  name=\"taxAmt\" value=" + bean.getTaxAmt() + ">\n" +
+                "    <input type=\"text\"  name=\"custCd\" value=" + bean.getCustCd() + ">\n" +
+                "    <input type=\"text\"  name=\"mchPostCd\" value=" + bean.getMchPostCd() + ">\n" +
+                "    <input type=\"text\"  name=\"taxId\" value=" + bean.getTaxId() + ">\n" +
+                "    <input type=\"text\"  name=\"mchMinorityCd\" value=" + bean.getMchMinorityCd() + ">\n" +
+                "    <input type=\"text\"  name=\"mchStateCd\" value=" + bean.getMchStateCd() + ">\n" +
+                "    <input type=\"text\"  name=\"shipPostCd\" value=" + bean.getShipPostCd() + ">\n" +
+                "    <input type=\"text\"  name=\"destPostCd\" value=" + bean.getDestPostCd() + ">\n" +
+                "    <input type=\"text\"  name=\"invoiceNum\" value=" + bean.getInvoiceNum() + ">\n" +
+                "    <input type=\"text\"  name=\"freightAmt\" value=" + bean.getFreightAmt() + ">\n" +
+                "    <input type=\"text\"  name=\"dutyAmt\" value=" + bean.getDutyAmt() + ">\n" +
+                "    <input type=\"text\"  name=\"secretKey\" value=" + bean.getSecretKey() + ">\n" +
+                "    <input type=\"text\"  name=\"signMsg\" value=" + bean.getSignMsg() + ">\n" +
                 "</form>\n" +
                 "</body>\n" +
                 "<script>\n" +
