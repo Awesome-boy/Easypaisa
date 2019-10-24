@@ -3,6 +3,9 @@ package sdkdemo.kx.come.easypaisa;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -117,6 +120,9 @@ public class ThreeDSecurePaymentActivity extends BaseActivity {
     @BindView(R.id.et_txt_billing_address_8)
     EditText mETTxtBillingAddress8;
 
+    @BindView(R.id.wv_payment)
+    WebView mWebView;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -124,6 +130,7 @@ public class ThreeDSecurePaymentActivity extends BaseActivity {
         setContentView(R.layout.activity_payment);
         ButterKnife.bind(this);
         initView();
+        sendRequest();
     }
 
     private void initView() {
@@ -139,23 +146,78 @@ public class ThreeDSecurePaymentActivity extends BaseActivity {
     private void sendRequest() {
         PaymentBean bean = setBean();
         Log.d("zt", "zt--" + bean.toString());
-        Checkout.getInstance().setPayment(ThreeDSecurePaymentActivity.this,CheckoutTools.REQUES_PAY, bean, new CheckoutCallback() {
-            @Override
-            public void onCancel(String mResultMessage) {
-                Log.i("zt", "onCancel:" + mResultMessage);
-            }
+//        Checkout.getInstance().setPayment(ThreeDSecurePaymentActivity.this,CheckoutTools.REQUES_PAY, bean, new CheckoutCallback() {
+//            @Override
+//            public void onCancel(String mResultMessage) {
+//                Log.i("zt", "onCancel:" + mResultMessage);
+//            }
+//
+//            @Override
+//            public void onSuccess(String mResultMessage) {
+//                Log.i("zt", "onSuccess:" + mResultMessage);
+//
+//            }
+//
+//            @Override
+//            public void onError(String mResultMessage) {
+//                Log.i("zt", "onError:" + mResultMessage);
+//            }
+//        });
 
-            @Override
-            public void onSuccess(String mResultMessage) {
-                Log.i("zt", "onSuccess:" + mResultMessage);
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.getSettings().setPluginState(WebSettings.PluginState.ON);
+        mWebView.setWebChromeClient(new WebChromeClient());
+        mWebView.getSettings().setSavePassword(false);
+        mWebView.removeJavascriptInterface("searchBoxJavaBridge_");
+        mWebView.removeJavascriptInterface("accessibility");
+        mWebView.removeJavascriptInterface("accessibilityTraversal");
 
-            }
+        mWebView.loadData(constructHtmlData(bean), "text/html", "UTF-8");
+    }
 
-            @Override
-            public void onError(String mResultMessage) {
-                Log.i("zt", "onError:" + mResultMessage);
-            }
-        });
+    private String constructHtmlData(PaymentBean bean) {
+        String data = "<html>\n" +
+                "<body onload=\"load()\">\n" +
+                "<form id =\"payment_form\" action=\"http://sd.coshine.com/gateway/gateway/payment\" method=\"post\" >\n" +
+                "    <input type=\"text\"  name=\"version\" value=\"v1.0\">\n" +
+                "    <input type=\"text\"  name=\"signType\" value=\"0\">\n" +
+                "    <input type=\"text\"  name=\"tradeNature\" value=\"GOODS\">\n" +
+                "    <input type=\"text\"  name=\"billingAddress\" value='{\"firstName\":\"john\",\"lastName\":\"connor\",\"address1\":\"Muster Str. 12\",\"address2\":\"\",\"zipCode\":\"10178\",\"city\":\"Los Angeles\",\"country\":\"US\"}'>\n" +
+                "    <input type=\"text\"  name=\"shippingAddress\" value='{\"firstName\":\"john\",\"lastName\":\"connor\",\"address1\":\"Muster Str. 12\",\"address2\":\"\",\"zipCode\":\"10178\",\"city\":\"Los Angeles\",\"country\":\"US\"}'>\n" +
+                "    <input type=\"text\"  name=\"payType\" value=\"13\">\n" +
+                "    <input type=\"text\"  name=\"merchantId\" value=\"010704515311001\">\n" +
+                "    <input type=\"text\"  name=\"orderNo\" value=" + bean.getOrderNo() + ">+\n" +
+                "    <input type=\"text\"  name=\"orderCurrency\" value=\"840\">\n" +
+                "    <input type=\"text\"  name=\"orderAmount\" value=\"0.11\">\n" +
+                "    <input type=\"text\"  name=\"orderDatetime\" value=\"20191021100208\">\n" +
+                "    <input type=\"text\"  name=\"pickupUrl\" value=\"http://sd.coshine.com:80/gateway/tests/payment_result.jsp\">\n" +
+                "    <input type=\"text\"  name=\"receiveUrl\" value=\"http://sd.coshine.com:80/gateway/tests/payment_callback.jsp\">\n" +
+                "    <input type=\"text\"  name=\"payerEmail\" value=\"paygwy@test.com\">\n" +
+                "    <input type=\"text\"  name=\"payerTelephone\" value=\"13888888888\">\n" +
+                "    <input type=\"text\"  name=\"IPAddress\" value=\"113.246.97.101\">\n" +
+                "    <input type=\"text\"  name=\"crdLvl\" value=\"1\">\n" +
+                "    <input type=\"text\"  name=\"taxAmt\" value=\"1\">\n" +
+                "    <input type=\"text\"  name=\"custCd\" value=\"1\">\n" +
+                "    <input type=\"text\"  name=\"mchPostCd\" value=\"1\">\n" +
+                "    <input type=\"text\"  name=\"taxId\" value=\"1\">\n" +
+                "    <input type=\"text\"  name=\"mchMinorityCd\" value=\"1\">\n" +
+                "    <input type=\"text\"  name=\"mchStateCd\" value=\"1\">\n" +
+                "    <input type=\"text\"  name=\"shipPostCd\" value=\"1\">\n" +
+                "    <input type=\"text\"  name=\"destPostCd\" value=\"1\">\n" +
+                "    <input type=\"text\"  name=\"invoiceNum\" value=\"1\">\n" +
+                "    <input type=\"text\"  name=\"freightAmt\" value=\"1\">\n" +
+                "    <input type=\"text\"  name=\"dutyAmt\" value=\"1\">\n" +
+                "    <input type=\"text\"  name=\"secretKey\" value=\"ZloDcaGkb1zP9/L7LkgWDA==\">\n" +
+                "    <input type=\"text\"  name=\"signMsg\" value=\"8f0e5fd0b3797194f27f0f547dcf9e0c\">\n" +
+                "</form>\n" +
+                "</body>\n" +
+                "<script>\n" +
+                "\t    function load() {\n" +
+                "\t    \tdocument.getElementById(\"payment_form\").submit();\n" +
+                "\t    }\n" +
+                "    </script>\n" +
+                "</html>";
+        return data;
     }
 
     @OnItemSelected({R.id.sp_pay_type, R.id.sp_currency, R.id.sp_ext2_1})
