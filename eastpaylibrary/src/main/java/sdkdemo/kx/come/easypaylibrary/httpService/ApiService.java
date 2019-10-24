@@ -11,8 +11,8 @@ import retrofit2.http.POST;
 import sdkdemo.kx.come.easypaylibrary.BuildConfig;
 
 public interface ApiService {
-    String BASE_URL = "http://192.168.0.102:8080//paygwy/";
-//    String BASE_URL = "http://sd.coshine.com/gateway/";
+//    String BASE_URL = "http://192.168.0.102:8080//paygwy/";
+    String BASE_URL = "http://sd.coshine.com/gateway/";
     //支付
     @FormUrlEncoded
     @POST("gateway/payment")
