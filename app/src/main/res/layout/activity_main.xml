@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
-    tools:context=".MainActivity">
+    tools:context="sdkdemo.kx.come.eastpay.MainActivity">
 
 
 <!--    <Button-->

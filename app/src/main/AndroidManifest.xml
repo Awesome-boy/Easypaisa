@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="sdkdemo.kx.come.eastpay.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,14 +19,14 @@
             </intent-filter>
         </activity>
         <activity android:name="sdkdemo.kx.come.easypaylibrary.activity.PaymentActivity"/>
-        <activity android:name=".ThreeDSecurePaymentActivity" />
-        <activity android:name=".AuthorizationActivity" />
-        <activity android:name=".GenerateQRActivity" />
-        <activity android:name=".ParseQRActivity" />
-        <activity android:name=".InquiryActivity" />
-        <activity android:name=".VoidActivity" />
-        <activity android:name=".RefundActivity" />
-        <activity android:name=".PreAuthorizationActivity" />
+        <activity android:name="sdkdemo.kx.come.eastpay.ThreeDSecurePaymentActivity" />
+        <activity android:name="sdkdemo.kx.come.eastpay.AuthorizationActivity" />
+        <activity android:name="sdkdemo.kx.come.eastpay.GenerateQRActivity" />
+        <activity android:name="sdkdemo.kx.come.eastpay.ParseQRActivity" />
+        <activity android:name="sdkdemo.kx.come.eastpay.InquiryActivity" />
+        <activity android:name="sdkdemo.kx.come.eastpay.VoidActivity" />
+        <activity android:name="sdkdemo.kx.come.eastpay.RefundActivity" />
+        <activity android:name="sdkdemo.kx.come.eastpay.PreAuthorizationActivity" />
     </application>
 
 </manifest>

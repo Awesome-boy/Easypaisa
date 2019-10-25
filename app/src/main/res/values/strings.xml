@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Easypaisa</string>
+    <string name="app_name">EastPaySDK</string>
     <string name="qrCode">QR Code is null</string>
     <string name="orignalCode">Original Order is null</string>
     <string name="orderNo"> Order No. is null</string>
