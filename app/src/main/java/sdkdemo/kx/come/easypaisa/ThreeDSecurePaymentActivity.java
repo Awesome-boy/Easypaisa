@@ -282,7 +282,6 @@ public class ThreeDSecurePaymentActivity extends BaseActivity {
         bean.setSecretKey(parseViewText(mETSignKey));
 
         // payment
-        bean.setSignMsg("8f0e5fd0b3797194f27f0f547dcf9e0c");
         return bean;
     }
 
