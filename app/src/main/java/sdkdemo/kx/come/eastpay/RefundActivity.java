@@ -37,6 +37,11 @@ public class RefundActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_refund);
         ButterKnife.bind(this);
+        initView();
+    }
+
+    private void initView() {
+        mETTxtRefund2.setText(getCurrentTime());
     }
 
     @OnClick(R.id.btn_confirm)

@@ -38,6 +38,11 @@ public class VoidActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_void);
         ButterKnife.bind(this);
+        initView();
+    }
+
+    private void initView() {
+        mETTxtVoid2.setText(getCurrentTime());
     }
 
     @OnClick(R.id.btn_confirm)
