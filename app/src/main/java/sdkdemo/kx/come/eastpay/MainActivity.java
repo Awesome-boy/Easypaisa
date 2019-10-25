@@ -93,8 +93,5 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private void startActivity(Class<?> cls) {
-        Intent intent = new Intent(this, cls);
-        startActivity(intent);
-    }
+
 }

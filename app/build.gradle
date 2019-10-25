@@ -60,6 +60,8 @@ dependencies {
     implementation 'com.alibaba:fastjson:1.2.56'
     implementation 'com.jakewharton:butterknife:10.2.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+    implementation 'com.google.zxing:core:3.3.0'
     implementation project(path: ':eastpaylibrary')
 
     // for the aar

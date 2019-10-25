@@ -3,6 +3,10 @@
     package="sdkdemo.kx.come.easypaisa">
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT" />\
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -27,6 +31,8 @@
         <activity android:name="sdkdemo.kx.come.eastpay.VoidActivity" />
         <activity android:name="sdkdemo.kx.come.eastpay.RefundActivity" />
         <activity android:name="sdkdemo.kx.come.eastpay.PreAuthorizationActivity" />
+        <activity android:name="sdkdemo.kx.come.eastpay.ShowDataActivity" />
+        <activity android:name="sdkdemo.kx.come.eastpay.ScanActivity" />
     </application>
 
 </manifest>

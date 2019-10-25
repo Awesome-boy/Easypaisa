@@ -2,6 +2,7 @@ package sdkdemo.kx.come.eastpay;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -54,6 +55,11 @@ public abstract class BaseActivity extends Activity {
         }
         toast.show();
 
+    }
+
+    protected void startActivity(Class<?> cls) {
+        Intent intent = new Intent(this, cls);
+        startActivity(intent);
     }
 
 

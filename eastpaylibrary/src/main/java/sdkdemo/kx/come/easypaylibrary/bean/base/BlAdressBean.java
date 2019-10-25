@@ -9,6 +9,7 @@ public class BlAdressBean implements Serializable {
     private String address2;
     private String zipCode;
     private String city;
+    private String state;
     private String country;
 
     public String getFirstName() {
@@ -65,5 +66,13 @@ public class BlAdressBean implements Serializable {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

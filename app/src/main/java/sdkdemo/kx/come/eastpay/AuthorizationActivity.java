@@ -1,5 +1,6 @@
 package sdkdemo.kx.come.eastpay;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -202,6 +203,7 @@ public class AuthorizationActivity extends BaseActivity {
 
     }
 
+
     private void setAuthorization() {
         AuthorizationBean bean = setBean();
         Log.d("zt", "zt--" + bean.toString());
@@ -215,13 +217,17 @@ public class AuthorizationActivity extends BaseActivity {
             public void onSuccess(String mResultMessage) {
                 Log.i("zt", "onSuccess:" + mResultMessage);
                 AuthorizationResp bean= com.alibaba.fastjson.JSONObject.parseObject(mResultMessage,AuthorizationResp.class);
+                showToast(AuthorizationActivity.this,mResultMessage);
                 Log.d("zt",bean.getIssuerId());
+                Intent intent=new Intent(AuthorizationActivity.this,ShowDataActivity.class);
+                intent.putExtra("data",bean);
+                startActivity(intent);
             }
 
             @Override
             public void onError(String mResultMessage) {
                 Log.i("zt", "onError:" + mResultMessage);
-               ErrorBean errorBean= com.alibaba.fastjson.JSONObject.parseObject(mResultMessage,ErrorBean.class);
+                ErrorBean errorBean= com.alibaba.fastjson.JSONObject.parseObject(mResultMessage,ErrorBean.class);
                 if (errorBean.getErrorCode().equals("E3")){
                     Toast.makeText(AuthorizationActivity.this, "Repeat the order",Toast.LENGTH_SHORT).show();
                 }
@@ -245,6 +251,7 @@ public class AuthorizationActivity extends BaseActivity {
         blAdressBean.setAddress2(parseViewText(mETTxtBillingAddress8));
         blAdressBean.setZipCode(parseViewText(mETTxtBillingAddress3));
         blAdressBean.setCity(parseViewText(mETTxtBillingAddress4));
+        blAdressBean.setState(parseViewText(mETTxtBillingAddress5));
         // TODO: 2019-10-21 miss state
         blAdressBean.setCountry(parseViewText(mETTxtBillingAddress6));
 
@@ -257,6 +264,7 @@ public class AuthorizationActivity extends BaseActivity {
         spAdressBean.setAddress2(parseViewText(mETTxtShippingAddress8));
         spAdressBean.setZipCode(parseViewText(mETTxtShippingAddress3));
         spAdressBean.setCity(parseViewText(mETTxtShippingAddress4));
+        spAdressBean.setState(parseViewText(mETTxtShippingAddress5));
         // TODO: 2019-10-21 miss state
         spAdressBean.setCountry(parseViewText(mETTxtShippingAddress6));
         bean.setSpAdressBean(spAdressBean);

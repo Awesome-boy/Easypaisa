@@ -229,7 +229,7 @@ public class ThreeDSecurePaymentActivity extends BaseActivity {
         blAdressBean.setCity(parseViewText(mETTxtBillingAddress4));
         // TODO: 2019-10-21 miss state
         blAdressBean.setCountry(parseViewText(mETTxtBillingAddress6));
-
+        blAdressBean.setState(parseViewText(mETTxtBillingAddress5));
         bean.setBlAdressBean(blAdressBean);
 
         SpAdressBean spAdressBean = new SpAdressBean();
@@ -239,6 +239,7 @@ public class ThreeDSecurePaymentActivity extends BaseActivity {
         spAdressBean.setAddress2(parseViewText(mETTxtShippingAddress8));
         spAdressBean.setZipCode(parseViewText(mETTxtShippingAddress3));
         spAdressBean.setCity(parseViewText(mETTxtShippingAddress4));
+        spAdressBean.setState(parseViewText(mETTxtShippingAddress5));
         // TODO: 2019-10-21 miss state
         spAdressBean.setCountry(parseViewText(mETTxtShippingAddress6));
         bean.setSpAdressBean(spAdressBean);

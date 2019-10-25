@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -461,11 +461,12 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:padding="8dp"
             android:id="@+id/rl_ext2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/rl_exttl"
+            android:layout_marginTop="27dp"
+            android:padding="8dp"
             android:visibility="visible">
 
             <RelativeLayout
@@ -769,14 +770,9 @@
             <RelativeLayout
                 android:id="@+id/rl_ext2_12"
                 android:layout_width="match_parent"
-                android:layout_below="@id/rl_txt_ext_10"
-                android:layout_height="wrap_content">
-                <TextView
-                    style="@style/InputText"
-                    android:layout_width="@dimen/text_width"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:text="Order Items" />f
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_txt_ext_10">
+
                 <EditText
                     android:id="@+id/et_txt_ext_12"
                     style="@style/InputText"
@@ -785,21 +781,29 @@
                     android:layout_marginStart="@dimen/text_width"
                     android:background="@drawable/background_edittext"
                     android:paddingStart="@dimen/padding_start"
-                    android:text="item1:1,1,1;item2:" />
+                    android:text="item1:1,1,1;item2:" />f
+
+                <TextView
+                    style="@style/InputText"
+                    android:layout_width="@dimen/text_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Order Items" />
 
             </RelativeLayout>
 
             <TextView
-                android:background="@color/colorPrimary"
                 android:id="@+id/tv_title_ext2_1"
                 style="@style/InputText"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:background="@color/colorPrimary"
                 android:gravity="center"
                 android:text="ext2" />
 
 
         </RelativeLayout>
+
         <RelativeLayout
             android:padding="8dp"
             android:id="@+id/rl_shipping_address"
