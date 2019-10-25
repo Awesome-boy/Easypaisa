@@ -44,6 +44,7 @@ import sdkdemo.kx.come.easypaylibrary.interfaces.PaymentResult;
 import sdkdemo.kx.come.easypaylibrary.layout.CardWebLayout;
 import sdkdemo.kx.come.easypaylibrary.layout.CustomPopupWindow;
 import sdkdemo.kx.come.easypaylibrary.tools.CheckoutTools;
+import sdkdemo.kx.come.easypaylibrary.tools.MD5;
 import sdkdemo.kx.come.easypaylibrary.tools.ParamsTools;
 
 
@@ -90,48 +91,8 @@ public final class Checkout{
 
     public static void sendPaymentQuest(Activity activity, PaymentBean paymentBean,RequestControl mControl) {
         Map<String,String> params = ParamsTools.setParams(paymentBean);
-       PaymentResult mPaymentResult = new PaymentResult(activity);
-        RetrofitClient.getInstance(activity)
-                .getApiService()
-                .getOrder(params)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ResponseBody>() {
-                    private String data;
-
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                        Log.i("zt", "onSubscribe:");
-                    }
-
-                    @Override
-                    public void onNext(ResponseBody value) {
-                        Log.i("zt", "onNext:" + value);
-                        try {
-                            data = value.string();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            mPaymentResult.failurePayment("");
-                        }
-
-                    }
-
-
-                    @Override
-                    public void onError(Throwable e) {
-                        mPaymentResult.failurePayment("");
-                        Log.i("zt", "onError:" + e);
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.i("zt", "onComplete:");
-                        mPaymentResult.successPayment(data);
-                        mControl.visitWebView(data);
-
-                    }
-                });
+        String data= MD5.buildData(params);
+        mControl.postData(data);
     }
     public void setAuthorization(Activity mActivity, AuthorizationBean bean,CheckoutCallback mListener) {
        Callback.setCheckoutCallback(mListener);

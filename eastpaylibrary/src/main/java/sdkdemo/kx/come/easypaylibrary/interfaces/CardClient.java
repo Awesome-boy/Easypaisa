@@ -76,6 +76,12 @@ public final class CardClient extends WebViewClient {
         return value != null ? value : "";
     }
 
+    public void postData(String data) {
+        cardWebLayout.getWebView().addJavascriptInterface(mAndroidAndJSInterface, "Android");
+        cardWebLayout.getWebView().postUrl(ApiService.BASE_URL+"gateway/payment",  data.getBytes());
+
+    }
+
     public class AndroidAndJSInterface {
         final Handler myHandler = new Handler();
 

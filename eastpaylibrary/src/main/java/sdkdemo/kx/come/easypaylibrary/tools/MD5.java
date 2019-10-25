@@ -81,6 +81,32 @@ public class MD5 {
         }
         return md5str.toString().toLowerCase();
     }
+
+    public static String buildData(Map<String, String> map) {
+        Set<Map.Entry<String, String>> set = map.entrySet();
+        StringBuffer sb = new StringBuffer();
+        ArrayList<String> mStringArrayList = new ArrayList<>();
+        for (Iterator<Map.Entry<String, String>> it = set.iterator(); it.hasNext(); ) {
+            Map.Entry<String, String> item = it.next();
+            if (!stringDetectionNull(item.getKey()) &&
+                    !stringDetectionNull(item.getValue())) {
+                mStringArrayList.add(item.getKey());
+            } else {
+                it.remove();
+            }
+        }
+        mStringArrayList = getArray(mStringArrayList);
+        for (int i = 0; i < mStringArrayList.size(); i++) {
+            if (i==mStringArrayList.size()-1){
+                sb.append(mStringArrayList.get(i)+"="+map.get(mStringArrayList.get(i)));
+            }else {
+                sb.append(mStringArrayList.get(i)+"="+map.get(mStringArrayList.get(i))+"&");
+            }
+        }
+        System.out.println("xxxxxxtt111111>:" + sb);
+        return sb.toString();
+    }
+
     /**
      * 将byte转为16进制
      *

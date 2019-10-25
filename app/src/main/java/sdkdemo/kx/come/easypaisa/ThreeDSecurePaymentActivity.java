@@ -127,8 +127,6 @@ public class ThreeDSecurePaymentActivity extends BaseActivity {
     @BindView(R.id.et_txt_billing_address_8)
     EditText mETTxtBillingAddress8;
 
-    @BindView(R.id.wv_payment)
-    WebView mWebView;
 
     @BindView(R.id.sv_payment)
     ScrollView mSvPayment;
@@ -144,7 +142,6 @@ public class ThreeDSecurePaymentActivity extends BaseActivity {
 
     private void initView() {
         mSvPayment.setVisibility(View.VISIBLE);
-        mWebView.setVisibility(View.GONE);
         mOrderNo.setText(getCurrentTime());
         mETTxt4.setText(getCurrentTime());
     }
@@ -153,90 +150,32 @@ public class ThreeDSecurePaymentActivity extends BaseActivity {
     protected void onClick() {
         sendRequest();
         mSvPayment.setVisibility(View.GONE);
-        mWebView.setVisibility(View.VISIBLE);
     }
 
     private void sendRequest() {
         PaymentBean bean = setBean();
         Log.d("zt", "zt--" + bean.toString());
-//        Checkout.getInstance().setPayment(ThreeDSecurePaymentActivity.this,CheckoutTools.REQUES_PAY, bean, new CheckoutCallback() {
-//            @Override
-//            public void onCancel(String mResultMessage) {
-//                Log.i("zt", "onCancel:" + mResultMessage);
-//            }
-//
-//            @Override
-//            public void onSuccess(String mResultMessage) {
-//                Log.i("zt", "onSuccess:" + mResultMessage);
-//
-//            }
-//
-//            @Override
-//            public void onError(String mResultMessage) {
-//                Log.i("zt", "onError:" + mResultMessage);
-//            }
-//        });
+        Checkout.getInstance().setPayment(ThreeDSecurePaymentActivity.this,CheckoutTools.REQUES_PAY, bean, new CheckoutCallback() {
+            @Override
+            public void onCancel(String mResultMessage) {
+                Log.i("zt", "onCancel:" + mResultMessage);
+            }
 
-        mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.getSettings().setPluginState(WebSettings.PluginState.ON);
-        mWebView.setWebChromeClient(new WebChromeClient());
-        mWebView.getSettings().setSavePassword(false);
-        mWebView.removeJavascriptInterface("searchBoxJavaBridge_");
-        mWebView.removeJavascriptInterface("accessibility");
-        mWebView.removeJavascriptInterface("accessibilityTraversal");
+            @Override
+            public void onSuccess(String mResultMessage) {
+                Log.i("zt", "onSuccess:" + mResultMessage);
 
-        mWebView.loadData(constructHtmlData(bean), "text/html", "UTF-8");
+            }
+
+            @Override
+            public void onError(String mResultMessage) {
+                Log.i("zt", "onError:" + mResultMessage);
+            }
+        });
+
     }
 
 
-    private String constructHtmlData(PaymentBean bean) {
-
-        Gson gson = new Gson();
-        String billingAddress = gson.toJson(bean.getBlAdressBean());
-        String shippingAddress = gson.toJson(bean.getSpAdressBean());
-        String data = "<html>\n" +
-                "<body onload=\"load()\">\n" +
-                "<form id =\"payment_form\" action=\"http://sd.coshine.com/gateway/gateway/payment\" method=\"post\" >\n" +
-                "    <input type=\"text\"  name=\"version\" value=\"v1.0\">\n" +
-                "    <input type=\"text\"  name=\"signType\" value=\"0\">\n" +
-                "    <input type=\"text\"  name=\"tradeNature\" value=\"GOODS\">\n" +
-                "    <input type=\"text\"  name=\"billingAddress\" value=\'"+billingAddress+"\'>\n" +
-                "    <input type=\"text\"  name=\"shippingAddress\" value=\'"+shippingAddress+"\'>\n" +
-                "    <input type=\"text\"  name=\"payType\" value=" + bean.getPayType() + ">\n" +
-                "    <input type=\"text\"  name=\"merchantId\" value=" + bean.getMerchantId() + ">\n" +
-                "    <input type=\"text\"  name=\"orderNo\" value=" + bean.getOrderNo() + ">+\n" +
-                "    <input type=\"text\"  name=\"orderCurrency\" value=" + bean.getOrderCurrency() + ">\n" +
-                "    <input type=\"text\"  name=\"orderAmount\" value=" + bean.getOrderAmount() + ">\n" +
-                "    <input type=\"text\"  name=\"orderDatetime\" value=" + bean.getOrderDatetime() + ">\n" +
-                "    <input type=\"text\"  name=\"pickupUrl\" value=" + bean.getPickupUrl() + ">\n" +
-                "    <input type=\"text\"  name=\"receiveUrl\" value=" + bean.getReceiveUrl() + ">\n" +
-                "    <input type=\"text\"  name=\"payerEmail\" value=" + bean.getPayerEmail() + ">\n" +
-                "    <input type=\"text\"  name=\"payerTelephone\" value=" + bean.getPayerTelephone() + ">\n" +
-                "    <input type=\"text\"  name=\"IPAddress\" value=" + bean.getIPAdress() + ">\n" +
-                "    <input type=\"text\"  name=\"crdLvl\" value=" + bean.getCrdLvl() + ">\n" +
-                "    <input type=\"text\"  name=\"taxAmt\" value=" + bean.getTaxAmt() + ">\n" +
-                "    <input type=\"text\"  name=\"custCd\" value=" + bean.getCustCd() + ">\n" +
-                "    <input type=\"text\"  name=\"mchPostCd\" value=" + bean.getMchPostCd() + ">\n" +
-                "    <input type=\"text\"  name=\"taxId\" value=" + bean.getTaxId() + ">\n" +
-                "    <input type=\"text\"  name=\"mchMinorityCd\" value=" + bean.getMchMinorityCd() + ">\n" +
-                "    <input type=\"text\"  name=\"mchStateCd\" value=" + bean.getMchStateCd() + ">\n" +
-                "    <input type=\"text\"  name=\"shipPostCd\" value=" + bean.getShipPostCd() + ">\n" +
-                "    <input type=\"text\"  name=\"destPostCd\" value=" + bean.getDestPostCd() + ">\n" +
-                "    <input type=\"text\"  name=\"invoiceNum\" value=" + bean.getInvoiceNum() + ">\n" +
-                "    <input type=\"text\"  name=\"freightAmt\" value=" + bean.getFreightAmt() + ">\n" +
-                "    <input type=\"text\"  name=\"dutyAmt\" value=" + bean.getDutyAmt() + ">\n" +
-                "    <input type=\"text\"  name=\"secretKey\" value=" + bean.getSecretKey() + ">\n" +
-                "    <input type=\"text\"  name=\"signMsg\" value=" + bean.getSignMsg() + ">\n" +
-                "</form>\n" +
-                "</body>\n" +
-                "<script>\n" +
-                "\t    function load() {\n" +
-                "\t    \tdocument.getElementById(\"payment_form\").submit();\n" +
-                "\t    }\n" +
-                "    </script>\n" +
-                "</html>";
-        return data;
-    }
 
     @OnItemSelected({R.id.sp_pay_type, R.id.sp_currency, R.id.sp_ext2_1})
     protected void onItemSelected(View view, int position) {

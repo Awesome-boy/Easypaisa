@@ -23,4 +23,7 @@ public class RequestControl {
         mCardClient.sendUrl(data);
     }
 
+    public void postData(String data) {
+        mCardClient.postData(data);
+    }
 }
