@@ -9,6 +9,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import sdkdemo.kx.come.easypaisa.R;
+import sdkdemo.kx.come.easypaylibrary.activity.PaymentActivity;
 
 
 public class MainActivity extends BaseActivity {
@@ -27,6 +28,8 @@ public class MainActivity extends BaseActivity {
     Button mBtnRefund;
     @BindView(R.id.btn_cancellation)
     Button mBtnCancellation;
+    @BindView(R.id.btn_load)
+    Button btn_load;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +53,7 @@ public class MainActivity extends BaseActivity {
 
     @OnClick({R.id.btn_payment, R.id.btn_authorization, R.id.btn_generate_qr
             , R.id.btn_parse_qr, R.id.btn_inquiry, R.id.btn_void
-            , R.id.btn_refund, R.id.btn_cancellation})
+            , R.id.btn_refund, R.id.btn_cancellation,R.id.btn_load})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_payment: {
@@ -85,6 +88,11 @@ public class MainActivity extends BaseActivity {
             }
             case R.id.btn_cancellation: {
                 startActivity(PreAuthorizationActivity.class);
+                break;
+            }
+
+            case R.id.btn_load: {
+                startActivity(WebviewActivity.class);
                 break;
             }
             default:
